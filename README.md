@@ -24,9 +24,6 @@ You might find it helpful to use the refactoring steps:
 3. Extract
 4. Clean
 
-In this exercise, seeing the duplication in step 1 can be as hard as 
-performing the rest of the steps to actually remove it!
-
 I also suggest you use automated tool support as much as possible.
 
 Credits
