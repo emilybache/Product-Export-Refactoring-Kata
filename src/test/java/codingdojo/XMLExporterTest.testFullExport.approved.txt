@@ -17,6 +17,10 @@ Wild Rose
 <price currency='USD'>10.99</price>
 Cocoa Butter
 </product>
+<product id='EVENT01'>
+<price currency='USD'>119.99</price>
+Eyeshadow Masterclass
+</product>
 </order>
 <order id='1235'>
 <product id='TOOL01' colour='PINK' weight='100'>
@@ -30,6 +34,10 @@ Blusher Brush
 <product id='PURFUME01' colour='PINK' weight='200'>
 <price currency='USD'>34.99</price>
 Wild Rose
+</product>
+<product id='EVENT02'>
+<price currency='USD'>149.99</price>
+Makeover
 </product>
 </order>
 </orders>

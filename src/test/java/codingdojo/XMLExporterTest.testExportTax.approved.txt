@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<orderHistory>
-<order date='2018-09-01T13:24Z' totalDollars='195.95'>
+<orderTax>
+<order date='2018-09-01T13:24Z'>
 <product id='LIPSTICK01'>Cherry Bloom</product>
 <product id='LIPSTICK01'>Cherry Bloom</product>
 <product id='PURFUME01'>Wild Rose</product>
 <product id='SKIN_CREAM01'>Cocoa Butter</product>
 <product id='EVENT01'>Eyeshadow Masterclass</product>
-</order>
-<order date='2017-08-31T14:02Z' totalDollars='229.96'>
+<orderTax currency='USD'>63.29</orderTax></order>
+<order date='2017-08-31T14:02Z'>
 <product id='TOOL01'>Eyelash curler</product>
 <product id='TOOL01'>Blusher Brush</product>
 <product id='PURFUME01'>Wild Rose</product>
 <product id='EVENT02'>Makeover</product>
-</order>
-</orderHistory>
+<orderTax currency='USD'>61.49</orderTax></order>
+124.78
+</orderTax>

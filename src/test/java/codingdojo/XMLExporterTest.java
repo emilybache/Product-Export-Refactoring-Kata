@@ -4,12 +4,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.approvaltests.Approvals;
 
-import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.TimeZone;
 
 public class XMLExporterTest {
 
@@ -30,26 +26,18 @@ public class XMLExporterTest {
         nordstan.addStockedItems(cherryBloom, rosePetal, blusherBrush, eyelashCurler, wildRose, cocoaButter);
 
         // Store events add themselves to the stocked items at their store
-        Product masterclass = new StoreEvent("Eyeshadow Masterclass", nordstan, new Price(119.99D, "USD"));
-        Product makeover = new StoreEvent("Makeover", nordstan, new Price(149.99D, "USD"));
+        Product masterclass = new StoreEvent("Eyeshadow Masterclass", "EVENT01", nordstan, new Price(119.99D, "USD"));
+        Product makeover = new StoreEvent("Makeover", "EVENT02", nordstan, new Price(149.99D, "USD"));
 
-        Order order1 = new Order("1234", fromISO8601UTC("2018-09-01T13:24Z"), nordstan);
-        order1.addProducts(cherryBloom, cherryBloom, wildRose, cocoaButter);
+        Order order1 = new Order("1234", Util.fromISO8601UTC("2018-09-01T13:24Z"), nordstan);
+        order1.addProducts(cherryBloom, cherryBloom, wildRose, cocoaButter, masterclass);
 
-        Order order2 = new Order("1235", fromISO8601UTC("2018-08-31T14:02Z"), nordstan);
-        order2.addProducts(eyelashCurler, blusherBrush, wildRose);
+        Order order2 = new Order("1235", Util.fromISO8601UTC("2017-08-31T14:02Z"), nordstan);
+        order2.addProducts(eyelashCurler, blusherBrush, wildRose, makeover);
 
         orders = new ArrayList<Order>();
         orders.add(order1);
         orders.add(order2);
-    }
-
-    public static Date fromISO8601UTC(String dateStr) throws ParseException {
-        TimeZone tz = TimeZone.getTimeZone("UTC");
-        DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm'Z'");
-        df.setTimeZone(tz);
-
-        return df.parse(dateStr);
     }
 
     @Test
@@ -61,6 +49,13 @@ public class XMLExporterTest {
     @Test
     public void testExportHistory() {
         String xml = XMLExporter.exportHistory(orders);
+        Approvals.verify(xml);
+    }
+
+
+    @Test
+    public void testExportTax() throws Exception {
+        String xml = XMLExporter.exportTaxDetails(orders);
         Approvals.verify(xml);
     }
 }

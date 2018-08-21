@@ -15,6 +15,14 @@ public class Order implements ModelObject {
         this.store = store;
     }
 
+    public double totalDollars() {
+        double dollars = 0D;
+        for (Product product : getProducts()) {
+            dollars += product.getPrice().getAmountInCurrency("USD");
+        }
+        return dollars;
+    }
+
     public void addProduct(Product product) {
         this.products.add(product);
     }

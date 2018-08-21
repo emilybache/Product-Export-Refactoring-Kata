@@ -7,8 +7,8 @@ package codingdojo;
 public class StoreEvent extends Product {
     protected Store location;
 
-    public StoreEvent(String name, Store location, Price price) {
-        super(name, "EVENT", 0, price);
+    public StoreEvent(String name, String id, Store location, Price price) {
+        super(name, id, 0, price);
         setLocation(location);
     }
 
@@ -16,6 +16,8 @@ public class StoreEvent extends Product {
         this.location = locationStore;
         location.addStoreEvent(this);
     }
+
+
 
     @Override
     public String toString() {
@@ -25,5 +27,10 @@ public class StoreEvent extends Product {
                 ", name='" + name + '\'' +
                 ", price=" + price +
                 '}';
+    }
+
+    @Override
+    public boolean isEvent() {
+        return true;
     }
 }

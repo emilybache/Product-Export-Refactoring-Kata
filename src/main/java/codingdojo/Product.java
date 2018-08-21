@@ -1,7 +1,5 @@
 package codingdojo;
 
-import java.text.DecimalFormatSymbols;
-
 public class Product implements ModelObject {
 
     protected final String name;
@@ -46,5 +44,9 @@ public class Product implements ModelObject {
 
     public Price getPrice() {
         return price;
+    }
+
+    public boolean isEvent() {
+        return false;
     }
 }
