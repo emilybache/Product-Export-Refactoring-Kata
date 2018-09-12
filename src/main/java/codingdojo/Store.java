@@ -48,11 +48,7 @@ public class Store implements ModelObject {
 
     @Override
     public String toString() {
-        return "Store{" +
-                "id='" + id + '\'' +
-                ", itemsInStock=" + itemsInStock +
-                ", name='" + name + '\'' +
-                '}';
+        return "Store{" + name + '}';
     }
 
     @Override
@@ -60,4 +56,7 @@ public class Store implements ModelObject {
         throw new UnsupportedOperationException("missing from this exercise - shouldn't be called from a unit test");
     }
 
+    public String getName() {
+        return name;
+    }
 }

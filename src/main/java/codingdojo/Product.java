@@ -30,12 +30,7 @@ public class Product implements ModelObject {
 
     @Override
     public String toString() {
-        return "Product{" +
-                "id='" + id + '\'' +
-                ", name='" + name + '\'' +
-                ", weight=" + weight +
-                ", price=" + price +
-                '}';
+        return "Product{" + name + '}';
     }
 
     public long getWeight() {

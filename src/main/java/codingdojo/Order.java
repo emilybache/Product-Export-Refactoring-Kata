@@ -29,12 +29,7 @@ public class Order implements ModelObject {
 
     @Override
     public String toString() {
-        return "Order{" +
-                "id='" + id + '\'' +
-                ", date=" + date +
-                ", products=" + products +
-                ", store=" + store +
-                '}';
+        return "Order{" + id + '}';
     }
 
     @Override
