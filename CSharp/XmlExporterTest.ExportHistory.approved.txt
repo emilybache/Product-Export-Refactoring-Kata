@@ -1,6 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-16"?>
-<orderHistory>
-  <order date="2018-09-01T00:00:00Z" totalDollars="0">
-    <product id="LIPSTICK01">Cherry Bloom</product>
-  </order>
-</orderHistory>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace export
 {
@@ -102,7 +103,7 @@ namespace export
 
         public double TotalDollars()
         {
-            return 0;
+            return Products.Sum(product => product.Price.GetAmountInCurrency("USD"));
         }
 
         public void AddProducts(params Product[] products)
