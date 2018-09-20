@@ -1,7 +1,5 @@
 using System.Collections.Generic;
-using System.IO;
 using System.Text;
-using System.Xml;
 
 namespace export
 {
@@ -146,9 +144,9 @@ namespace export
             {
                 xml.Append("<product");
                 xml.Append(" id='");
-                xml.Append(product.Value.Id);
+                xml.Append(product.Id);
                 xml.Append("'");
-                if (product.Value.IsEvent())
+                if (product.IsEvent())
                 {
                     xml.Append(" location='");
                     xml.Append(store.Name);
@@ -157,14 +155,20 @@ namespace export
                 else
                 {
                     xml.Append(" weight='");
-                    xml.Append(product.Value.Weight);
+                    xml.Append(product.Weight);
                     xml.Append("'");
                 }
+
                 xml.Append(">");
-                xml.Append(product.Key);
+                xml.Append("<price");
+                xml.Append(" currency='");
+                xml.Append(product.Price.Currency);
+                xml.Append("'>");
+                xml.Append(product.Price.Amount);
+                xml.Append("</price>");
+                xml.Append(product);
                 xml.Append("</product>");
             }
-
 
             xml.Append("</store>");
 
@@ -175,6 +179,5 @@ namespace export
         {
             return "PINK"; // everything is pink right now. In future we might support other colours too. Perhaps mauve?
         }
-
     }
 }

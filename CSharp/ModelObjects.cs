@@ -64,14 +64,14 @@ namespace export
 
     public class Store
     {
-        public readonly Dictionary<string, Product> Stock = new Dictionary<string, Product>();
+        public readonly IList<Product> Stock = new List<Product>();
         public string Name { get; set; }
         public string Id { get; set; }
 
 
         public void AddStockedItems(params Product[] products)
         {
-            foreach (var product in products) Stock.Add(product.Name, product);
+            foreach (var product in products) Stock.Add(product);
         }
     }
 
