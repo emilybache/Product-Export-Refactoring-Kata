@@ -1,3 +1,6 @@
 target
 *.iml
 .idea
+.vs
+CSharp/bin
+CSharp/obj
