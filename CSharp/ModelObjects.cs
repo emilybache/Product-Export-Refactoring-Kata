@@ -1,23 +1,23 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 
 namespace export
 {
     public class StoreEvent : Product
     {
-        private Store Store { get; set; }
-
         public StoreEvent(string name, string type, Store store, Price price) : base(name, type, 0, price)
         {
             SetLocation(store);
         }
 
+        private Store Store { get; set; }
+
         public void SetLocation(Store store)
         {
-            this.Store = store;
+            Store = store;
             store.AddStockedItems(this);
         }
+
         public override bool IsEvent()
         {
             return true;
@@ -26,18 +26,18 @@ namespace export
 
     public class Product
     {
+        public Product(string name, string type, int weight, Price price)
+        {
+            Name = name;
+            Id = type;
+            Weight = weight;
+            Price = price;
+        }
+
         public string Name { get; set; }
         public string Id { get; set; }
         public int Weight { get; set; }
         public Price Price { get; set; }
-
-        public Product(string name, string type, int weight, Price price)
-        {
-            this.Name = name;
-            this.Id = type;
-            this.Weight = weight;
-            this.Price = price;
-        }
 
         public virtual bool IsEvent()
         {
@@ -47,11 +47,10 @@ namespace export
 
     public class Price
     {
-
         public Price(double amount, string currency)
         {
-            this.Amount = amount;
-            this.Currency = currency;
+            Amount = amount;
+            Currency = currency;
         }
 
         public double Amount { get; set; }
@@ -59,24 +58,20 @@ namespace export
 
         public double GetAmountInCurrency(string currency)
         {
-            return this.Amount;
+            return Amount;
         }
     }
 
     public class Store
     {
+        public readonly Dictionary<string, Product> Stock = new Dictionary<string, Product>();
         public string Name { get; set; }
         public string Id { get; set; }
-
-        private readonly Dictionary<string, Product> _itemsInStock = new Dictionary<string, Product>();
 
 
         public void AddStockedItems(params Product[] products)
         {
-            foreach (var product in products)
-            {
-                this._itemsInStock.Add(product.Name, product);
-            }
+            foreach (var product in products) Stock.Add(product.Name, product);
         }
     }
 
@@ -93,7 +88,4 @@ namespace export
             return 0;
         }
     }
-
 }
-
-

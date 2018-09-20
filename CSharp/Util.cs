@@ -1,13 +1,23 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
+using System.Xml;
 
 namespace export
 {
-    class Util
+    public static class XmlFormatter
+    {
+        public static string PrettyPrint(string xml)
+        {
+            var xmlDoc = new XmlDocument();
+            var sw = new StringWriter();
+            xmlDoc.LoadXml(xml);
+            xmlDoc.Save(sw);
+            return sw.ToString();
+        }
+    }
+
+    internal class Util
     {
         public static DateTime FromIsoDate(string datetime)
         {

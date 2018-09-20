@@ -1,18 +1,12 @@
-using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.IO;
 using System.Text;
 using System.Xml;
 
 namespace export
 {
-
-
-
     public class XmlExporter
     {
-
         public static string ExportFull(List<Order> orders)
         {
             var xml = new StringBuilder();
@@ -24,7 +18,7 @@ namespace export
                 xml.Append(" id='");
                 xml.Append(order.Id);
                 xml.Append("'>");
-                foreach (Product product in order.Products)
+                foreach (var product in order.Products)
                 {
                     xml.Append("<product");
                     xml.Append(" id='");
@@ -36,12 +30,14 @@ namespace export
                         xml.Append(ColourGroupFor(product));
                         xml.Append("'");
                     }
+
                     if (product.Weight > 0)
                     {
                         xml.Append(" weight='");
                         xml.Append(product.Weight);
                         xml.Append("'");
                     }
+
                     xml.Append(">");
                     xml.Append("<price");
                     xml.Append(" currency='");
@@ -52,8 +48,10 @@ namespace export
                     xml.Append(product.Name);
                     xml.Append("</product>");
                 }
+
                 xml.Append("</order>");
             }
+
             xml.Append("</orders>");
             return XmlFormatter.PrettyPrint(xml.ToString());
         }
@@ -82,22 +80,12 @@ namespace export
                     xml.Append(product.Name);
                     xml.Append("</product>");
                 }
+
                 xml.Append("</order>");
             }
+
             xml.Append("</orderHistory>");
             return XmlFormatter.PrettyPrint(xml.ToString());
-        }
-
-        public static class XmlFormatter
-        {
-            public static string PrettyPrint(string xml)
-            {
-                XmlDocument xmlDoc = new XmlDocument();
-                StringWriter sw = new StringWriter();
-                xmlDoc.LoadXml(xml);
-                xmlDoc.Save(sw);
-                return sw.ToString();
-            }
         }
 
         public static string ExportTaxDetails(List<Order> orders)
@@ -112,7 +100,7 @@ namespace export
                 xml.Append(Util.ToIsoDate(order.Date));
                 xml.Append("'");
                 xml.Append(">");
-                double tax = 0D;
+                var tax = 0D;
                 foreach (var product in order.Products)
                 {
                     xml.Append("<product");
@@ -123,34 +111,65 @@ namespace export
                     xml.Append(product.Name);
                     xml.Append("</product>");
                     if (product.IsEvent())
-                    {
                         tax += product.Price.GetAmountInCurrency("USD") * 0.25;
-                    }
                     else
-                    {
                         tax += product.Price.GetAmountInCurrency("USD") * 0.175;
-                    }
                 }
+
                 xml.Append("<orderTax currency='USD'>");
                 if (order.Date < Util.FromIsoDate("2018-01-01T00:00Z"))
-                {
                     tax += 10;
-                }
                 else
-                {
                     tax += 20;
-                }
                 xml.Append($"{tax:N2}%");
                 xml.Append("</orderTax>");
                 xml.Append("</order>");
             }
-            double totalTax = TaxCalculator.CalculateAddedTax(orders);
+
+            var totalTax = TaxCalculator.CalculateAddedTax(orders);
             xml.Append($"{totalTax:N2}%");
-            xml.Append('\n');
             xml.Append("</orderTax>");
             return XmlFormatter.PrettyPrint(xml.ToString());
         }
 
+        public static string ExportStore(Store store)
+        {
+            var xml = new StringBuilder();
+            xml.Append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+
+            xml.Append("<store");
+            xml.Append(" name='");
+            xml.Append(store.Name);
+            xml.Append("'");
+            xml.Append(">");
+            foreach (var product in store.Stock)
+            {
+                xml.Append("<product");
+                xml.Append(" id='");
+                xml.Append(product.Value.Id);
+                xml.Append("'");
+                if (product.Value.IsEvent())
+                {
+                    xml.Append(" location='");
+                    xml.Append(store.Name);
+                    xml.Append("'");
+                }
+                else
+                {
+                    xml.Append(" weight='");
+                    xml.Append(product.Value.Weight);
+                    xml.Append("'");
+                }
+                xml.Append(">");
+                xml.Append(product.Key);
+                xml.Append("</product>");
+            }
+
+
+            xml.Append("</store>");
+
+            return XmlFormatter.PrettyPrint(xml.ToString());
+        }
 
         private static string ColourGroupFor(Product product)
         {

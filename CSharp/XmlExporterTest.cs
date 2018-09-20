@@ -1,12 +1,13 @@
 
 using System;
 using System.Collections.Generic;
+using ApprovalTests;
+using ApprovalTests.Reporters;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace export
 {
-
-
+    [UseReporter(typeof(DiffReporter))]
     [TestClass]
     public class XmlExporterTest
     {
@@ -36,7 +37,7 @@ namespace export
             };
             var orders = new List<Order> { order };
 
-            // TODO: Finish this test case
+            // TODO: finish writing this test case
         }
 
 
