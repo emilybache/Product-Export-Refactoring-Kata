@@ -166,7 +166,7 @@ namespace export
                 xml.Append("'>");
                 xml.Append(product.Price.Amount);
                 xml.Append("</price>");
-                xml.Append(product);
+                xml.Append(product.Name);
                 xml.Append("</product>");
             }
 

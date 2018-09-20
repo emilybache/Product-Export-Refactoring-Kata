@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-16"?>
+<orders>
+  <order id="1234">
+    <product id="LIPSTICK01" colour="PINK" weight="30">
+      <price currency="USD">14,99</price>Cherry Bloom</product>
+  </order>
+</orders>

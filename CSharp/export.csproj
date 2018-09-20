@@ -60,7 +60,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="SampleProducts.cs" />
+    <Compile Include="SampleModelObjects.cs" />
     <Compile Include="TaxCalculator.cs" />
     <Compile Include="Util.cs" />
     <Compile Include="ModelObjects.cs" />

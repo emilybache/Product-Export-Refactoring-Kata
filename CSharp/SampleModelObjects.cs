@@ -9,7 +9,7 @@ namespace export
     /// <summary>
     /// This class contains some sample product data that you could use in your tests.
     /// </summary>
-    public class SampleProducts
+    public class SampleModelObjects
     {
         
         public static Product CherryBloom = new Product("Cherry Bloom", "LIPSTICK01", 30, new Price(14.99D, "USD"));
@@ -19,13 +19,16 @@ namespace export
         public static Product WildRose = new Product("Wild Rose", "PURFUME01", 200, new Price(34.99D, "USD"));
         public static Product CocoaButter = new Product("Cocoa Butter", "SKIN_CREAM01", 250, new Price(10.99D, "USD"));
 
-        public static Store FlagshipStore = new Store { Name = "Nordstan", Id = "4189", Stock = new List<Product> { CherryBloom }};
-        public static Store BigStore = new Store { Name = "Backaplan", Id = "4189", Stock = new List<Product> { CherryBloom, RosePetal, BlusherBrush, EyelashCurler, WildRose, CocoaButter } };
+        public static Store FlagshipStore = new Store("Nordstan", "4189", new Product[] { CherryBloom });
+        public static Store BigStore = new Store("Backaplan", "4189", new Product[] { CherryBloom, RosePetal, BlusherBrush, EyelashCurler, WildRose, CocoaButter } );
         
         // Store events add themselves to the stocked items at their store
         public static Product Masterclass = new StoreEvent("Eyeshadow Masterclass", "EVENT01", FlagshipStore, new Price(119.99D, "USD"));
         public static Product Makeover = new StoreEvent("Makeover", "EVENT02", BigStore, new Price(149.99D, "USD"));
 
+        public static Order RecentOrder = new Order("1234", Util.FromIsoDate("2018-09-01T00:00Z"), 
+            SampleModelObjects.FlagshipStore, new Product[] {CherryBloom});
     }
+
     
 }

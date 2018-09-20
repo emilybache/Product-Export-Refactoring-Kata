@@ -65,6 +65,14 @@ namespace export
     public class Store
     {
         public readonly IList<Product> Stock = new List<Product>();
+        
+        public Store(string name, string id, Product[] products)
+        {
+            this.Name = name;
+            this.Id = id;
+            this.AddStockedItems(products);
+        }
+
         public string Name { get; set; }
         public string Id { get; set; }
 
@@ -77,15 +85,29 @@ namespace export
 
     public class Order
     {
-        public readonly IList<Product> Products = new List<Product>();
+        
+        public Order(string id, DateTime dateTime, Store flagshipStore, Product[] products)
+        {
+            this.Id = id;
+            this.Date = dateTime;
+            this.Store = flagshipStore;
+            this.AddProducts(products);
+        }
 
         public string Id { get; set; }
         public DateTime Date { get; set; }
         public Store Store { get; set; }
 
+        public readonly IList<Product> Products = new List<Product>();
+
         public double TotalDollars()
         {
             return 0;
+        }
+
+        public void AddProducts(params Product[] products)
+        {
+            foreach (var product in products) Products.Add(product);
         }
     }
 }
