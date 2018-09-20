@@ -20,11 +20,10 @@ namespace export
         public static Product CocoaButter = new Product("Cocoa Butter", "SKIN_CREAM01", 250, new Price(10.99D, "USD"));
 
         public static Store FlagshipStore = new Store("Nordstan", "4189", new Product[] { CherryBloom });
-        public static Store BigStore = new Store("Backaplan", "4189", new Product[] { CherryBloom, RosePetal, BlusherBrush, EyelashCurler, WildRose, CocoaButter } );
         
         // Store events add themselves to the stocked items at their store
         public static Product Masterclass = new StoreEvent("Eyeshadow Masterclass", "EVENT01", FlagshipStore, new Price(119.99D, "USD"));
-        public static Product Makeover = new StoreEvent("Makeover", "EVENT02", BigStore, new Price(149.99D, "USD"));
+        public static Product Makeover = new StoreEvent("Makeover", "EVENT02", FlagshipStore, new Price(149.99D, "USD"));
 
         public static Order RecentOrder = new Order("1234", Util.FromIsoDate("2018-09-01T00:00Z"), 
             SampleModelObjects.FlagshipStore, new Product[] {CherryBloom});
