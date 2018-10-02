@@ -1,6 +1,8 @@
 package codingdojo;
 
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -64,5 +66,9 @@ public class Store implements ModelObject {
 
     public String getName() {
         return name;
+    }
+
+    public Collection<Product> getStockedProducts() {
+        return itemsInStock.values();
     }
 }

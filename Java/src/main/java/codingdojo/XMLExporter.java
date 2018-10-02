@@ -120,8 +120,7 @@ public class XMLExporter {
         return XmlFormatter.prettyPrint(xml.toString());
     }
 
-     public static string ExportStore(Store store)
-        {
+     public static String exportStore(Store store) throws TransformerException {
             StringBuffer xml = new StringBuffer();
             xml.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
 
@@ -130,7 +129,7 @@ public class XMLExporter {
             xml.append(store.getName());
             xml.append("'");
             xml.append(">");
-            for (Product product : store.getStock())
+            for (Product product : store.getStockedProducts())
             {
                 xml.append("<product");
                 xml.append(" id='");
