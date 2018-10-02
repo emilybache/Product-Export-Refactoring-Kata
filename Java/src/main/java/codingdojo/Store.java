@@ -17,6 +17,12 @@ public class Store implements ModelObject {
         this.name = name;
         this.id = id;
     }
+
+    public Store(String name, String id, Product[] products) {
+        this(name, id);
+        this.addStockedItems(products);
+    }
+
     public void addStockedItems(Product... items) {
         for (Product item: items) {
             this.itemsInStock.put(item.getName(), item);

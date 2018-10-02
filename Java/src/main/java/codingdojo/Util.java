@@ -7,11 +7,16 @@ import java.util.Date;
 import java.util.TimeZone;
 
 public class Util {
-    public static Date fromISO8601UTC(String dateStr) throws ParseException {
+    public static Date fromISO8601UTC(String dateStr) {
         TimeZone tz = TimeZone.getTimeZone("UTC");
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm'Z'");
         df.setTimeZone(tz);
 
-        return df.parse(dateStr);
+        try {
+            return df.parse(dateStr);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }

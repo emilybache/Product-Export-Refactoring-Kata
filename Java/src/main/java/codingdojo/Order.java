@@ -15,6 +15,11 @@ public class Order implements ModelObject {
         this.store = store;
     }
 
+    public Order(String id, Date date, Store store, Product[] products) {
+        this(id, date, store);
+        this.addProducts(products);
+    }
+
     public double totalDollars() {
         double dollars = 0D;
         for (Product product : getProducts()) {
