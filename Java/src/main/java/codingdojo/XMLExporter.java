@@ -120,6 +120,50 @@ public class XMLExporter {
         return XmlFormatter.prettyPrint(xml.toString());
     }
 
+     public static String exportStore(Store store) throws TransformerException {
+            StringBuffer xml = new StringBuffer();
+            xml.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+
+            xml.append("<store");
+            xml.append(" name='");
+            xml.append(store.getName());
+            xml.append("'");
+            xml.append(">");
+            for (Product product : store.getStockedProducts())
+            {
+                xml.append("<product");
+                xml.append(" id='");
+                xml.append(product.getId());
+                xml.append("'");
+                if (product.isEvent())
+                {
+                    xml.append(" location='");
+                    xml.append(store.getName());
+                    xml.append("'");
+                }
+                else
+                {
+                    xml.append(" weight='");
+                    xml.append(product.getWeight());
+                    xml.append("'");
+                }
+
+                xml.append(">");
+                xml.append("<price");
+                xml.append(" currency='");
+                xml.append(product.getPrice().getCurrency());
+                xml.append("'>");
+                xml.append(product.getPrice().getAmount());
+                xml.append("</price>");
+                xml.append(product.getName());
+                xml.append("</product>");
+            }
+
+            xml.append("</store>");
+
+            return XmlFormatter.prettyPrint(xml.toString());
+        }
+
     private static String isoDate(Date date) {
         TimeZone tz = TimeZone.getTimeZone("UTC");
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm'Z'");

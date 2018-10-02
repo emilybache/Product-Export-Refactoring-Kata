@@ -1,6 +1,8 @@
 package codingdojo;
 
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -17,6 +19,12 @@ public class Store implements ModelObject {
         this.name = name;
         this.id = id;
     }
+
+    public Store(String name, String id, Product[] products) {
+        this(name, id);
+        this.addStockedItems(products);
+    }
+
     public void addStockedItems(Product... items) {
         for (Product item: items) {
             this.itemsInStock.put(item.getName(), item);
@@ -58,5 +66,9 @@ public class Store implements ModelObject {
 
     public String getName() {
         return name;
+    }
+
+    public Collection<Product> getStockedProducts() {
+        return itemsInStock.values();
     }
 }
