@@ -26,7 +26,7 @@ namespace export
         public static Product Makeover = new StoreEvent("Makeover", "EVENT02", FlagshipStore, new Price(149.99D, "USD"));
 
         public static Order RecentOrder = new Order("1234", Util.FromIsoDate("2018-09-01T00:00Z"), 
-            SampleModelObjects.FlagshipStore, new Product[] {CherryBloom});
+            SampleModelObjects.FlagshipStore, new Product[] {Makeover});
     }
 
     

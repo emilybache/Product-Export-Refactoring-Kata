@@ -22,10 +22,10 @@ namespace export
                     xml.Append(" id='");
                     xml.Append(product.Id);
                     xml.Append("'");
-                    if (!product.IsEvent())
+                    if (product.IsEvent())
                     {
-                        xml.Append(" colour='");
-                        xml.Append(ColourGroupFor(product));
+                        xml.Append(" stylist='");
+                        xml.Append(StylistFor(product));
                         xml.Append("'");
                     }
 
@@ -175,9 +175,9 @@ namespace export
             return XmlFormatter.PrettyPrint(xml.ToString());
         }
 
-        private static string ColourGroupFor(Product product)
+        private static string StylistFor(Product product)
         {
-            return "PINK"; // everything is pink right now. In future we might support other colours too. Perhaps mauve?
+            return "Celeste Pulchritudo"; // in future we will look up the name of the stylist from the database
         }
     }
 }
