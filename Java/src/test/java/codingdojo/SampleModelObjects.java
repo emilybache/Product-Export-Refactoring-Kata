@@ -1,6 +1,12 @@
 package codingdojo;
 
-public class SampleModelObjects {
+import java.util.Arrays;
+
+/**
+ * This class contains some sample product data that you could use in your tests.
+ */
+public class SampleModelObjects
+{
 
     public static Product CherryBloom = new Product("Cherry Bloom", "LIPSTICK01", 30, new Price(14.99D, "USD"));
     public static Product RosePetal = new Product("Rose Petal", "LIPSTICK02", 30, new Price(14.99D, "USD"));
@@ -16,5 +22,5 @@ public class SampleModelObjects {
     public static Product Makeover = new StoreEvent("Makeover", "EVENT02", FlagshipStore, new Price(149.99D, "USD"));
 
     public static Order RecentOrder = new Order("1234", Util.fromISO8601UTC("2018-09-01T00:00Z"),
-            SampleModelObjects.FlagshipStore, new Product[] {CherryBloom});
+            SampleModelObjects.FlagshipStore, new Product[] {Makeover});
 }

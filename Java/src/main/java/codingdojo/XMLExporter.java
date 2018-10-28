@@ -11,7 +11,7 @@ import static codingdojo.Util.fromISO8601UTC;
 public class XMLExporter {
 
     public static String exportFull(Collection<Order> orders) throws TransformerException {
-        StringBuffer xml = new StringBuffer();
+        StringBuilder xml = new StringBuilder();
         xml.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
         xml.append("<orders>");
         for (Order order : orders) {
@@ -24,9 +24,9 @@ public class XMLExporter {
                 xml.append(" id='");
                 xml.append(product.getId());
                 xml.append("'");
-                if (!product.isEvent()) {
-                    xml.append(" colour='");
-                    xml.append(colourGroupFor(product));
+                if (product.isEvent()) {
+                    xml.append(" stylist='");
+                    xml.append(stylistFor(product));
                     xml.append("'");
                 }
                 if (product.getWeight() > 0) {
@@ -51,7 +51,7 @@ public class XMLExporter {
     }
 
     public static String exportHistory(Collection<Order> orders) throws TransformerException {
-        StringBuffer xml = new StringBuffer();
+        StringBuilder xml = new StringBuilder();
         xml.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
         xml.append("<orderHistory>");
         for (Order order : orders) {
@@ -79,7 +79,7 @@ public class XMLExporter {
 
     public static String exportTaxDetails(Collection<Order> orders) throws Exception {
         NumberFormat formatter = new DecimalFormat("#0.00");
-        StringBuffer xml = new StringBuffer();
+        StringBuilder xml = new StringBuilder();
         xml.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
         xml.append("<orderTax>");
         for (Order order : orders) {
@@ -120,7 +120,7 @@ public class XMLExporter {
         return XmlFormatter.prettyPrint(xml.toString());
     }
 
-     public static String exportStore(Store store) throws TransformerException {
+     public static String ExportStore(Store store) throws Exception {
             StringBuffer xml = new StringBuffer();
             xml.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
 
@@ -129,7 +129,7 @@ public class XMLExporter {
             xml.append(store.getName());
             xml.append("'");
             xml.append(">");
-            for (Product product : store.getStockedProducts())
+            for (Product product : store.getStock())
             {
                 xml.append("<product");
                 xml.append(" id='");
@@ -172,8 +172,8 @@ public class XMLExporter {
     }
 
 
-    private static String colourGroupFor(Product product) {
-        return "PINK"; // everything is pink right now. In future we might support other colours too. Perhaps mauve?
+    private static String stylistFor(Product product) {
+        return "Celeste Pulchritudo"; // in future we will look up the name of the stylist from the database
     }
 
 }

@@ -9,15 +9,13 @@ public class Order implements ModelObject {
     private Collection<Product> products = new ArrayList<>();
     private Store store;
 
-    public Order(String id, Date date, Store store) {
+    public Order(String id, Date date, Store store, Product[] products) {
         this.id = id;
         this.date = date;
         this.store = store;
-    }
-
-    public Order(String id, Date date, Store store, Product[] products) {
-        this(id, date, store);
-        this.addProducts(products);
+        for (Product product: products) {
+            this.addProduct(product);
+        }
     }
 
     public double totalDollars() {

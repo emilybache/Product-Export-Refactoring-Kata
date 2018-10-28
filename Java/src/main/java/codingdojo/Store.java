@@ -1,9 +1,6 @@
 package codingdojo;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Represents a physical Store where you can go and buy
@@ -68,7 +65,7 @@ public class Store implements ModelObject {
         return name;
     }
 
-    public Collection<Product> getStockedProducts() {
-        return itemsInStock.values();
+    public Collection<Product> getStock() {
+        return Collections.unmodifiableCollection(this.itemsInStock.values());
     }
 }
