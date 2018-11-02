@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?><orders>
+  <order id="1234">
+    <product id="EVENT02" stylist="Celeste Pulchritudo">
+      <price currency="USD">149.99</price>Makeover</product>
+  </order>
+</orders>
