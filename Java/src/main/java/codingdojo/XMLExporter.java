@@ -47,7 +47,7 @@ public class XMLExporter {
             xml.append("</order>");
         }
         xml.append("</orders>");
-        return XmlFormatter.prettyPrint(xml.toString());
+        return xml.toString();
     }
 
     public static String exportHistory(Collection<Order> orders) throws TransformerException {
@@ -74,7 +74,7 @@ public class XMLExporter {
             xml.append("</order>");
         }
         xml.append("</orderHistory>");
-        return XmlFormatter.prettyPrint(xml.toString());
+        return xml.toString();
     }
 
     public static String exportTaxDetails(Collection<Order> orders) throws Exception {
@@ -117,7 +117,7 @@ public class XMLExporter {
         xml.append(formatter.format(totalTax));
         xml.append('\n');
         xml.append("</orderTax>");
-        return XmlFormatter.prettyPrint(xml.toString());
+        return xml.toString();
     }
 
      public static String ExportStore(Store store) throws Exception {
@@ -161,7 +161,7 @@ public class XMLExporter {
 
             xml.append("</store>");
 
-            return XmlFormatter.prettyPrint(xml.toString());
+            return xml.toString();
         }
 
     private static String isoDate(Date date) {
