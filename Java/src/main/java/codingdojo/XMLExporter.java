@@ -93,7 +93,7 @@ public class XMLExporter {
         return xml.toString();
     }
 
-     public static String ExportStore(Store store) throws Exception {
+     public static String exportStore(Store store) throws Exception {
             StringBuffer xml = new StringBuffer();
             xml.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
 

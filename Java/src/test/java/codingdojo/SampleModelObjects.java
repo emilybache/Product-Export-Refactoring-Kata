@@ -23,4 +23,6 @@ public class SampleModelObjects
 
     public static Order RecentOrder = new Order("1234", Util.fromISO8601UTC("2018-09-01T00:00Z"),
             SampleModelObjects.FlagshipStore, new Product[] {Makeover});
+    public static Order OldOrder = new Order("1235", Util.fromISO8601UTC("2017-09-01T00:00Z"),
+            SampleModelObjects.FlagshipStore, new Product[] {CherryBloom});
 }
