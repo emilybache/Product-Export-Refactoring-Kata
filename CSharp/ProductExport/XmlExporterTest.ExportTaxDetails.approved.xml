@@ -1,0 +1,9 @@
+﻿<orderTax>
+  <order date="2018-09-01T00:00:00Z">
+    <product id="EVENT02">Makeover</product>
+    <orderTax currency="USD">57.50%</orderTax>
+  </order>
+  <order date="2017-09-01T00:00:00Z">
+    <product id="LIPSTICK01">Cherry Bloom</product>
+    <orderTax currency="USD">12.62%</orderTax>
+  </order>70.12%</orderTax>
