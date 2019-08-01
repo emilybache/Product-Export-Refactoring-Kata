@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace export
+namespace ProductExport
 {
     public class XmlExporter
     {

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace export
+namespace ProductExport
 {
     public class TaxCalculator
     {
