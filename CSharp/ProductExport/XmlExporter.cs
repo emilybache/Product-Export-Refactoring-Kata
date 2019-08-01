@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -51,38 +52,6 @@ namespace ProductExport
             }
 
             xml.Append("</orders>");
-            return XmlFormatter.PrettyPrint(xml.ToString());
-        }
-
-        public static string ExportHistory(List<Order> orders)
-        {
-            var xml = new StringBuilder();
-            xml.Append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
-            xml.Append("<orderHistory>");
-            foreach (var order in orders)
-            {
-                xml.Append("<order");
-                xml.Append(" date='");
-                xml.Append(Util.ToIsoDate(order.Date));
-                xml.Append("'");
-                xml.Append(" totalDollars='");
-                xml.Append(order.TotalDollars());
-                xml.Append("'>");
-                foreach (var product in order.Products)
-                {
-                    xml.Append("<product");
-                    xml.Append(" id='");
-                    xml.Append(product.Id);
-                    xml.Append("'");
-                    xml.Append(">");
-                    xml.Append(product.Name);
-                    xml.Append("</product>");
-                }
-
-                xml.Append("</order>");
-            }
-
-            xml.Append("</orderHistory>");
             return XmlFormatter.PrettyPrint(xml.ToString());
         }
 
@@ -172,6 +141,43 @@ namespace ProductExport
 
             xml.Append("</store>");
 
+            return XmlFormatter.PrettyPrint(xml.ToString());
+        }
+
+        public static string ExportHistory(List<Order> orders)
+        {
+            var xml = new StringBuilder();
+            xml.Append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+            xml.Append("<orderHistory");
+            xml.Append(" createdAt='");
+            var now = DateTime.Now;
+            xml.Append(Util.ToIsoDate(now));
+            xml.Append("'");
+            xml.Append(">");
+            foreach (var order in orders)
+            {
+                xml.Append("<order");
+                xml.Append(" date='");
+                xml.Append(Util.ToIsoDate(order.Date));
+                xml.Append("'");
+                xml.Append(" totalDollars='");
+                xml.Append(order.TotalDollars());
+                xml.Append("'>");
+                foreach (var product in order.Products)
+                {
+                    xml.Append("<product");
+                    xml.Append(" id='");
+                    xml.Append(product.Id);
+                    xml.Append("'");
+                    xml.Append(">");
+                    xml.Append(product.Name);
+                    xml.Append("</product>");
+                }
+
+                xml.Append("</order>");
+            }
+
+            xml.Append("</orderHistory>");
             return XmlFormatter.PrettyPrint(xml.ToString());
         }
 
