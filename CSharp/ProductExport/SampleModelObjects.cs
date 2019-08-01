@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace export
+namespace ProductExport
 {
     /// <summary>
     /// This class contains some sample product data that you could use in your tests.

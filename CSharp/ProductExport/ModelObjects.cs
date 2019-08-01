@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace export
+namespace ProductExport
 {
     public class StoreEvent : Product
     {

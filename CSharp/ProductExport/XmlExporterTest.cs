@@ -1,15 +1,15 @@
 using System.Collections.Generic;
 using ApprovalTests;
 using ApprovalTests.Reporters;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
-namespace export
+
+namespace ProductExport
 {
-    [TestClass]
     public class XmlExporterTest
     {
 
-        [TestMethod]
+        [Fact]
         public void TestSomething()
         {
             // TODO: finish writing this test

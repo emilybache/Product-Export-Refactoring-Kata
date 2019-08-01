@@ -3,7 +3,7 @@ using System.Globalization;
 using System.IO;
 using System.Xml;
 
-namespace export
+namespace ProductExport
 {
     public static class XmlFormatter
     {
