@@ -21,12 +21,7 @@ public class StoreEvent extends Product {
 
     @Override
     public String toString() {
-        return "StoreEvent{" +
-                "id='" + id + '\'' +
-                ", location=" + location +
-                ", name='" + name + '\'' +
-                ", price=" + price +
-                '}';
+        return "StoreEvent{" + name + '}';
     }
 
     @Override

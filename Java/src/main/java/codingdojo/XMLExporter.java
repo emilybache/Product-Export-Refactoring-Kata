@@ -1,5 +1,6 @@
 package codingdojo;
 
+import javax.xml.transform.TransformerException;
 import java.text.*;
 import java.util.Collection;
 import java.util.Date;
@@ -9,23 +10,23 @@ import static codingdojo.Util.fromISO8601UTC;
 
 public class XMLExporter {
 
-    public static String exportFull(Collection<Order> orders) {
-        StringBuffer xml = new StringBuffer();
-        xml.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>" + '\n');
-        xml.append("<orders>" + '\n');
+    public static String exportFull(Collection<Order> orders) throws TransformerException {
+        StringBuilder xml = new StringBuilder();
+        xml.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+        xml.append("<orders>");
         for (Order order : orders) {
             xml.append("<order");
             xml.append(" id='");
             xml.append(order.getId());
-            xml.append("'>" + '\n');
+            xml.append("'>");
             for (Product product: order.getProducts()) {
                 xml.append("<product");
                 xml.append(" id='");
                 xml.append(product.getId());
                 xml.append("'");
-                if (!product.isEvent()) {
-                    xml.append(" colour='");
-                    xml.append(colourGroupFor(product));
+                if (product.isEvent()) {
+                    xml.append(" stylist='");
+                    xml.append(stylistFor(product));
                     xml.append("'");
                 }
                 if (product.getWeight() > 0) {
@@ -33,60 +34,33 @@ public class XMLExporter {
                     xml.append(product.getWeight());
                     xml.append("'");
                 }
-                xml.append(">" + '\n');
+                xml.append(">");
                 xml.append("<price");
                 xml.append(" currency='");
                 xml.append(product.getPrice().getCurrency());
                 xml.append("'>");
                 xml.append(product.getPrice().getAmount());
-                xml.append("</price>" + '\n');
-                xml.append(product.getName() + '\n');
-                xml.append("</product>" + '\n');
-            }
-            xml.append("</order>" + '\n');
-        }
-        xml.append("</orders>" + '\n');
-        return xml.toString();
-    }
-
-    public static String exportHistory(Collection<Order> orders) {
-        StringBuffer xml = new StringBuffer();
-        xml.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>" + '\n');
-        xml.append("<orderHistory>" + '\n');
-        for (Order order : orders) {
-            xml.append("<order");
-            xml.append(" date='");
-            xml.append(isoDate(order.getDate()));
-            xml.append("'");
-            xml.append(" totalDollars='");
-            xml.append(order.totalDollars());
-            xml.append("'>" + '\n');
-            for (Product product: order.getProducts()) {
-                xml.append("<product");
-                xml.append(" id='");
-                xml.append(product.getId());
-                xml.append("'");
-                xml.append(">");
+                xml.append("</price>");
                 xml.append(product.getName());
-                xml.append("</product>" + '\n');
+                xml.append("</product>");
             }
-            xml.append("</order>" + '\n');
+            xml.append("</order>");
         }
-        xml.append("</orderHistory>" + '\n');
+        xml.append("</orders>");
         return xml.toString();
     }
 
     public static String exportTaxDetails(Collection<Order> orders) throws Exception {
         NumberFormat formatter = new DecimalFormat("#0.00");
-        StringBuffer xml = new StringBuffer();
-        xml.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>" + '\n');
-        xml.append("<orderTax>" + '\n');
+        StringBuilder xml = new StringBuilder();
+        xml.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+        xml.append("<orderTax>");
         for (Order order : orders) {
             xml.append("<order");
             xml.append(" date='");
             xml.append(isoDate(order.getDate()));
             xml.append("'");
-            xml.append(">" + '\n');
+            xml.append(">");
             double tax = 0D;
             for (Product product: order.getProducts()) {
                 xml.append("<product");
@@ -95,7 +69,7 @@ public class XMLExporter {
                 xml.append("'");
                 xml.append(">");
                 xml.append(product.getName());
-                xml.append("</product>" + '\n');
+                xml.append("</product>");
                 if (product.isEvent()) {
                     tax += product.getPrice().getAmountInCurrency("USD")* 0.25;
                 } else {
@@ -110,12 +84,88 @@ public class XMLExporter {
             }
             xml.append(formatter.format(tax));
             xml.append("</orderTax>");
-            xml.append("</order>" + '\n');
+            xml.append("</order>");
         }
         double totalTax = TaxCalculator.calculateAddedTax(orders);
         xml.append(formatter.format(totalTax));
         xml.append('\n');
-        xml.append("</orderTax>" + '\n');
+        xml.append("</orderTax>");
+        return xml.toString();
+    }
+
+     public static String ExportStore(Store store) throws Exception {
+            StringBuffer xml = new StringBuffer();
+            xml.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+
+            xml.append("<store");
+            xml.append(" name='");
+            xml.append(store.getName());
+            xml.append("'");
+            xml.append(">");
+            for (Product product : store.getStock())
+            {
+                xml.append("<product");
+                xml.append(" id='");
+                xml.append(product.getId());
+                xml.append("'");
+                if (product.isEvent())
+                {
+                    xml.append(" location='");
+                    xml.append(store.getName());
+                    xml.append("'");
+                }
+                else
+                {
+                    xml.append(" weight='");
+                    xml.append(product.getWeight());
+                    xml.append("'");
+                }
+
+                xml.append(">");
+                xml.append("<price");
+                xml.append(" currency='");
+                xml.append(product.getPrice().getCurrency());
+                xml.append("'>");
+                xml.append(product.getPrice().getAmount());
+                xml.append("</price>");
+                xml.append(product.getName());
+                xml.append("</product>");
+            }
+
+            xml.append("</store>");
+
+            return xml.toString();
+        }
+
+    public static String exportHistory(Collection<Order> orders) throws TransformerException {
+        StringBuilder xml = new StringBuilder();
+        xml.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+        xml.append("<orderHistory");
+        xml.append(" createdAt='");
+        Date now = new Date();
+        xml.append(isoDate(now));
+        xml.append("'");
+        xml.append(">");
+        for (Order order : orders) {
+            xml.append("<order");
+            xml.append(" date='");
+            xml.append(isoDate(order.getDate()));
+            xml.append("'");
+            xml.append(" totalDollars='");
+            xml.append(order.totalDollars());
+            xml.append("'>");
+            for (Product product: order.getProducts()) {
+                xml.append("<product");
+                xml.append(" id='");
+                xml.append(product.getId());
+                xml.append("'");
+                xml.append(">");
+                xml.append(product.getName());
+                xml.append("</product>");
+            }
+            xml.append("</order>");
+        }
+        xml.append("</orderHistory>");
         return xml.toString();
     }
 
@@ -127,8 +177,8 @@ public class XMLExporter {
     }
 
 
-    private static String colourGroupFor(Product product) {
-        return "PINK"; // everything is pink right now. In future we might support other colours too. Perhaps mauve?
+    private static String stylistFor(Product product) {
+        return "Celeste Pulchritudo"; // in future we will look up the name of the stylist from the database
     }
 
 }

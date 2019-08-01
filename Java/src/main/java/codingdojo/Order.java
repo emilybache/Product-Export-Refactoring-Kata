@@ -9,10 +9,13 @@ public class Order implements ModelObject {
     private Collection<Product> products = new ArrayList<>();
     private Store store;
 
-    public Order(String id, Date date, Store store) {
+    public Order(String id, Date date, Store store, Product[] products) {
         this.id = id;
         this.date = date;
         this.store = store;
+        for (Product product: products) {
+            this.addProduct(product);
+        }
     }
 
     public double totalDollars() {
@@ -29,12 +32,7 @@ public class Order implements ModelObject {
 
     @Override
     public String toString() {
-        return "Order{" +
-                "id='" + id + '\'' +
-                ", date=" + date +
-                ", products=" + products +
-                ", store=" + store +
-                '}';
+        return "Order{" + id + '}';
     }
 
     @Override

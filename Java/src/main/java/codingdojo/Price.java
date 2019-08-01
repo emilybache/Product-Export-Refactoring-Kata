@@ -12,10 +12,7 @@ public class Price {
 
     @Override
     public String toString() {
-        return "Price{" +
-                "amount=" + amount +
-                ", currencyCode='" + currencyCode + '\'' +
-                '}';
+        return "Price{" + amount + '}';
     }
 
     public String getCurrency() {

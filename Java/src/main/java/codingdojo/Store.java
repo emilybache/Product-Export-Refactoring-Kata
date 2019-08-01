@@ -1,7 +1,6 @@
 package codingdojo;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Represents a physical Store where you can go and buy
@@ -17,6 +16,12 @@ public class Store implements ModelObject {
         this.name = name;
         this.id = id;
     }
+
+    public Store(String name, String id, Product[] products) {
+        this(name, id);
+        this.addStockedItems(products);
+    }
+
     public void addStockedItems(Product... items) {
         for (Product item: items) {
             this.itemsInStock.put(item.getName(), item);
@@ -48,11 +53,7 @@ public class Store implements ModelObject {
 
     @Override
     public String toString() {
-        return "Store{" +
-                "id='" + id + '\'' +
-                ", itemsInStock=" + itemsInStock +
-                ", name='" + name + '\'' +
-                '}';
+        return "Store{" + name + '}';
     }
 
     @Override
@@ -60,4 +61,11 @@ public class Store implements ModelObject {
         throw new UnsupportedOperationException("missing from this exercise - shouldn't be called from a unit test");
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public Collection<Product> getStock() {
+        return Collections.unmodifiableCollection(this.itemsInStock.values());
+    }
 }

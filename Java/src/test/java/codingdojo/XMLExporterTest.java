@@ -4,8 +4,10 @@ import org.junit.Before;
 import org.junit.Test;
 import org.approvaltests.Approvals;
 
+import javax.xml.transform.TransformerException;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class XMLExporterTest {
 
@@ -29,11 +31,11 @@ public class XMLExporterTest {
         Product masterclass = new StoreEvent("Eyeshadow Masterclass", "EVENT01", nordstan, new Price(119.99D, "USD"));
         Product makeover = new StoreEvent("Makeover", "EVENT02", nordstan, new Price(149.99D, "USD"));
 
-        Order order1 = new Order("1234", Util.fromISO8601UTC("2018-09-01T13:24Z"), nordstan);
-        order1.addProducts(cherryBloom, cherryBloom, wildRose, cocoaButter, masterclass);
+        Order order1 = new Order("1234", Util.fromISO8601UTC("2018-09-01T13:24Z"), nordstan,
+                new Product[]{cherryBloom, cherryBloom, wildRose, cocoaButter, masterclass});
 
-        Order order2 = new Order("1235", Util.fromISO8601UTC("2017-08-31T14:02Z"), nordstan);
-        order2.addProducts(eyelashCurler, blusherBrush, wildRose, makeover);
+        Order order2 = new Order("1235", Util.fromISO8601UTC("2017-08-31T14:02Z"), nordstan,
+                new Product[]{eyelashCurler, blusherBrush, wildRose, makeover});
 
         orders = new ArrayList<Order>();
         orders.add(order1);
@@ -41,21 +43,23 @@ public class XMLExporterTest {
     }
 
     @Test
-    public void testFullExport() {
+    public void testFullExport() throws TransformerException {
         String xml = XMLExporter.exportFull(orders);
-        Approvals.verify(xml);
+        Approvals.verifyXml(xml);
     }
-
-    @Test
-    public void testExportHistory() {
-        String xml = XMLExporter.exportHistory(orders);
-        Approvals.verify(xml);
-    }
-
 
     @Test
     public void testExportTax() throws Exception {
         String xml = XMLExporter.exportTaxDetails(orders);
-        Approvals.verify(xml);
+        Approvals.verifyXml(xml);
     }
+
+    @Test
+    public void testExportHistory() throws TransformerException {
+        String report = XMLExporter.exportHistory(orders);
+        String regex = "createdAt='[^']+'";
+        report = report.replaceFirst(regex, "createdAt='2018-09-20T00:00Z'");
+        Approvals.verifyXml(report);
+    }
+
 }
