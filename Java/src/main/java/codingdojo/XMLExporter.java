@@ -50,33 +50,6 @@ public class XMLExporter {
         return xml.toString();
     }
 
-    public static String exportHistory(Collection<Order> orders) throws TransformerException {
-        StringBuilder xml = new StringBuilder();
-        xml.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
-        xml.append("<orderHistory>");
-        for (Order order : orders) {
-            xml.append("<order");
-            xml.append(" date='");
-            xml.append(isoDate(order.getDate()));
-            xml.append("'");
-            xml.append(" totalDollars='");
-            xml.append(order.totalDollars());
-            xml.append("'>");
-            for (Product product: order.getProducts()) {
-                xml.append("<product");
-                xml.append(" id='");
-                xml.append(product.getId());
-                xml.append("'");
-                xml.append(">");
-                xml.append(product.getName());
-                xml.append("</product>");
-            }
-            xml.append("</order>");
-        }
-        xml.append("</orderHistory>");
-        return xml.toString();
-    }
-
     public static String exportTaxDetails(Collection<Order> orders) throws Exception {
         NumberFormat formatter = new DecimalFormat("#0.00");
         StringBuilder xml = new StringBuilder();
@@ -163,6 +136,38 @@ public class XMLExporter {
 
             return xml.toString();
         }
+
+    public static String exportHistory(Collection<Order> orders) throws TransformerException {
+        StringBuilder xml = new StringBuilder();
+        xml.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+        xml.append("<orderHistory");
+        xml.append(" createdAt='");
+        Date now = new Date();
+        xml.append(isoDate(now));
+        xml.append("'");
+        xml.append(">");
+        for (Order order : orders) {
+            xml.append("<order");
+            xml.append(" date='");
+            xml.append(isoDate(order.getDate()));
+            xml.append("'");
+            xml.append(" totalDollars='");
+            xml.append(order.totalDollars());
+            xml.append("'>");
+            for (Product product: order.getProducts()) {
+                xml.append("<product");
+                xml.append(" id='");
+                xml.append(product.getId());
+                xml.append("'");
+                xml.append(">");
+                xml.append(product.getName());
+                xml.append("</product>");
+            }
+            xml.append("</order>");
+        }
+        xml.append("</orderHistory>");
+        return xml.toString();
+    }
 
     private static String isoDate(Date date) {
         TimeZone tz = TimeZone.getTimeZone("UTC");
