@@ -17,6 +17,8 @@ class Price(ModelObject):
         self.amount = amount
         self.currency = currency
 
+    def get_amount_in_currency(self, currency):
+        return self.amount
 
 class Product(ModelObject):
     def __init__(self, name, id, weight, price):

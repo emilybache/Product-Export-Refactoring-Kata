@@ -65,9 +65,9 @@ def export_tax_details(orders):
             xml += product.name
             xml += "</product>"
             if product.isEvent:
-                tax += product.getPrice().getAmountInCurrency("USD")* 0.2
+                tax += product.price.get_amount_in_currency("USD") * 0.2
             else:
-                tax += product.getPrice().getAmountInCurrency("USD")* 0.175
+                tax += product.price.get_amount_in_currency("USD") * 0.175
 
         xml += "<orderTax currency='USD'>"
         if order.date < parse("2018-01-01T00:00Z"):
