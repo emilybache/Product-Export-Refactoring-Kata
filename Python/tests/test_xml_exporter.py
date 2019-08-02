@@ -3,6 +3,5 @@ from xml_exporter import *
 from approvaltests import verify
 
 
-def test_export_full():
-    xml = export_full([RecentOrder])
-    verify(xml)
+def test_something():
+    # TODO: write this test
