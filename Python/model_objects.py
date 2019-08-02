@@ -11,6 +11,12 @@ class Order(ModelObject):
         self.store = store
         self.products = products[:]
 
+    def total_dollars(self):
+        dollars = 0
+        for product in self.products:
+            dollars += product.price.get_amount_in_currency("USD")
+        return dollars
+
 
 class Price(ModelObject):
     def __init__(self, amount, currency):
@@ -19,6 +25,7 @@ class Price(ModelObject):
 
     def get_amount_in_currency(self, currency):
         return self.amount
+
 
 class Product(ModelObject):
     def __init__(self, name, id, weight, price):

@@ -139,7 +139,7 @@ def export_history(orders):
         xml += order.date.isoformat()
         xml += "'"
         xml += " totalDollars='"
-        xml += order.totalDollars()
+        xml += "{:.2f}".format(order.total_dollars())
         xml += "'>"
         for product in order.products:
             xml += "<product"
