@@ -26,7 +26,7 @@ def export_full(orders):
 
             if product.weight > 0:
                 xml += " weight='"
-                xml += product.weight
+                xml += "{:.2f}".format(product.weight)
                 xml += "'"
 
             xml += ">"
@@ -65,9 +65,9 @@ def export_tax_details(orders):
             xml += product.name
             xml += "</product>"
             if product.isEvent:
-                tax += product.getPrice().getAmountInCurrency("USD")* 0.2
+                tax += product.price.get_amount_in_currency("USD") * 0.2
             else:
-                tax += product.getPrice().getAmountInCurrency("USD")* 0.175
+                tax += product.price.get_amount_in_currency("USD") * 0.175
 
         xml += "<orderTax currency='USD'>"
         if order.date < parse("2018-01-01T00:00Z"):
@@ -107,7 +107,7 @@ def export_store(store):
             xml += "'"
         else:
             xml += " weight='"
-            xml += product.weight
+            xml += "{:.2f}".format(product.weight)
             xml += "'"
 
         xml += ">"
@@ -115,9 +115,9 @@ def export_store(store):
         xml += " currency='"
         xml += product.price.currency
         xml += "'>"
-        xml += product.price.amount
+        xml += "{:.2f}".format(product.price.amount)
         xml += "</price>"
-        xml += product.getName()
+        xml += product.name
         xml += "</product>"
 
     xml += "</store>"
@@ -139,7 +139,7 @@ def export_history(orders):
         xml += order.date.isoformat()
         xml += "'"
         xml += " totalDollars='"
-        xml += order.totalDollars()
+        xml += "{:.2f}".format(order.total_dollars())
         xml += "'>"
         for product in order.products:
             xml += "<product"

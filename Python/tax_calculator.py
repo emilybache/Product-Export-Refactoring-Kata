@@ -11,8 +11,8 @@ def calculateAddedTax(orders):
 
             for product in order.products:
                 if product.isEvent:
-                    tax += product.price.getAmountInCurrency("USD")* 0.25;
+                    tax += product.price.get_amount_in_currency("USD") * 0.25;
                 else:
-                    tax += product.price.getAmountInCurrency("USD")* 0.175;
+                    tax += product.price.get_amount_in_currency("USD") * 0.175;
 
         return tax

@@ -11,11 +11,20 @@ class Order(ModelObject):
         self.store = store
         self.products = products[:]
 
+    def total_dollars(self):
+        dollars = 0
+        for product in self.products:
+            dollars += product.price.get_amount_in_currency("USD")
+        return dollars
+
 
 class Price(ModelObject):
     def __init__(self, amount, currency):
         self.amount = amount
         self.currency = currency
+
+    def get_amount_in_currency(self, currency):
+        return self.amount
 
 
 class Product(ModelObject):
@@ -24,6 +33,7 @@ class Product(ModelObject):
         self.id = id
         self.weight = weight
         self.price = price
+        self.isEvent = False
 
 
 class Store(ModelObject):
@@ -31,7 +41,7 @@ class Store(ModelObject):
     def __init__(self, name, id, products=None):
         self.name = name
         self.id = id
-        self.products = products or []
+        self.stock = products or []
 
 
 class StoreEvent(Product):
