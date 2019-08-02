@@ -107,7 +107,7 @@ def export_store(store):
             xml += "'"
         else:
             xml += " weight='"
-            xml += product.weight
+            xml += "{:.2f}".format(product.weight)
             xml += "'"
 
         xml += ">"
@@ -115,9 +115,9 @@ def export_store(store):
         xml += " currency='"
         xml += product.price.currency
         xml += "'>"
-        xml += product.price.amount
+        xml += "{:.2f}".format(product.price.amount)
         xml += "</price>"
-        xml += product.getName()
+        xml += product.name
         xml += "</product>"
 
     xml += "</store>"

@@ -34,7 +34,7 @@ class Store(ModelObject):
     def __init__(self, name, id, products=None):
         self.name = name
         self.id = id
-        self.products = products or []
+        self.stock = products or []
 
 
 class StoreEvent(Product):

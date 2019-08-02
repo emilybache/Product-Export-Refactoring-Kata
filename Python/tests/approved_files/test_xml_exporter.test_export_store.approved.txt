@@ -1,0 +1,1 @@
+<?xml version="1.0" encoding="UTF-8"?><store name='Nordstan'><product id='LIPSTICK01' weight='30.00'><price currency='USD'>14.99</price>Cherry Bloom</product></store>
