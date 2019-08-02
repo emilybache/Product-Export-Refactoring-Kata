@@ -24,6 +24,7 @@ class Product(ModelObject):
         self.id = id
         self.weight = weight
         self.price = price
+        self.isEvent = False
 
 
 class Store(ModelObject):

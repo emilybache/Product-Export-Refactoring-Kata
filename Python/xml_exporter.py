@@ -26,7 +26,7 @@ def export_full(orders):
 
             if product.weight > 0:
                 xml += " weight='"
-                xml += product.weight
+                xml += "{:.2f}".format(product.weight)
                 xml += "'"
 
             xml += ">"
