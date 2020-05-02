@@ -1,8 +1,12 @@
 package codingdojo;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Date;
 
-public class Order implements ModelObject {
+public class Order {
 
     private final String id;
     private final Date date;
@@ -13,21 +17,13 @@ public class Order implements ModelObject {
         this.id = id;
         this.date = date;
         this.store = store;
-        for (Product product: products) {
-            this.addProduct(product);
-        }
+        addProducts(products);
     }
 
     public double totalDollars() {
-        double dollars = 0D;
-        for (Product product : getProducts()) {
-            dollars += product.getPrice().getAmountInCurrency("USD");
-        }
-        return dollars;
-    }
-
-    public void addProduct(Product product) {
-        this.products.add(product);
+        return products.stream(). //
+                mapToDouble(product -> product.getPrice().getAmountInCurrency("USD")). //
+                sum();
     }
 
     @Override
@@ -35,12 +31,10 @@ public class Order implements ModelObject {
         return "Order{" + id + '}';
     }
 
-    @Override
     public void saveToDatabase() {
         throw new UnsupportedOperationException("missing from this exercise - shouldn't be called from a unit test");
     }
 
-    @Override
     public String getId() {
         return id;
     }
@@ -56,4 +50,9 @@ public class Order implements ModelObject {
     public void addProducts(Product... products) {
         this.products.addAll(Arrays.asList(products));
     }
+
+    public Store getStore() {
+        return store;
+    }
+
 }
