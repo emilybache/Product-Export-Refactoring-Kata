@@ -90,7 +90,6 @@ public class XMLExporter {
         
         double totalTax = TaxCalculator.calculateAddedTax(orders);
         xml.append(formatter.format(totalTax));
-        xml.append('\n');
         xml.append("</orderTax>");
         return xml.toString();
     }
