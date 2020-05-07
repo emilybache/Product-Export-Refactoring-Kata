@@ -1,20 +1,19 @@
 package codingdojo;
 
-public class Product implements ModelObject {
+public class Product {
 
     protected final String name;
     protected final String id;
-    protected final long weight;
+    protected final int weight;
     protected final Price price;
 
-    public Product(String name, String id, long weight, Price price) {
+    public Product(String name, String id, int weight, Price price) {
         this.name = name;
         this.id = id;
         this.weight = weight;
         this.price = price;
     }
 
-    @Override
     public void saveToDatabase() {
         throw new UnsupportedOperationException("missing from this exercise - shouldn't be called from a unit test");
     }
@@ -23,7 +22,6 @@ public class Product implements ModelObject {
         return name;
     }
 
-    @Override
     public String getId() {
         return id;
     }
@@ -33,7 +31,7 @@ public class Product implements ModelObject {
         return "Product{" + name + '}';
     }
 
-    public long getWeight() {
+    public int getWeight() {
         return weight;
     }
 
