@@ -40,7 +40,7 @@ namespace ProductExport
                     xml.Append(">");
                     xml.Append("<price");
                     xml.Append(" currency='");
-                    xml.Append(product.Price.Currency);
+                    xml.Append(product.Price.CurrencyCode);
                     xml.Append("'>");
                     xml.Append(product.Price.Amount);
                     xml.Append("</price>");
@@ -131,7 +131,7 @@ namespace ProductExport
                 xml.Append(">");
                 xml.Append("<price");
                 xml.Append(" currency='");
-                xml.Append(product.Price.Currency);
+                xml.Append(product.Price.CurrencyCode);
                 xml.Append("'>");
                 xml.Append(product.Price.Amount);
                 xml.Append("</price>");

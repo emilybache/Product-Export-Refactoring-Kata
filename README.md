@@ -1,7 +1,7 @@
 Product XML Refactoring Kata
 ============================
 
-For practicing approval testing and refactoring duplication.
+For practising approval testing and refactoring duplication.
 
 Instructions
 ------------
@@ -9,11 +9,11 @@ Instructions
 It seems to me that adding tests to functional code is much easier than adding
 tests to stateful code. In this repo there are several functions and a fair
 amount of duplication. Your first task is to add test cases that will be good
-enough to support refactoring. I suggest using a coverage tool that also 
+enough to support refactoring. I suggest using a coverage tool that also
 shows branch coverage. You might also try some mutation testing to assess how
 good your tests are.
 
-Then when you're happy with your test coverage, your next task is to 
+Then when you're happy with your test coverage, your next task is to
 remove the duplication. (Note there is a branch 'with_tests' if you
 want to jump straight to this part of the exercise)
 
@@ -29,5 +29,5 @@ I also suggest you use automated tool support as much as possible.
 Credits
 -------
 
-This exercise was inspired by the "Replace Implicit Tree with Composite" 
-refactoring described in the book "Refactoring to Patterns" by Joshua Kerievsky
+This exercise was inspired by the "Replace Implicit Tree with Composite"
+refactoring described in the book "Refactoring to Patterns" by Joshua Kerievsky.
