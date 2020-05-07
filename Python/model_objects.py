@@ -1,5 +1,5 @@
 
-class ModelObject:
+class ModelObject(object):
     def save_to_database(self):
         raise Exception("You shouldn't call save_to_database from a unit test")
 
@@ -48,9 +48,6 @@ class StoreEvent(Product):
     """Ticket to In-store event, eg makeover, eyeshadow masterclass
     or beauty product launch evening reception"""
     def __init__(self, name, store, id, price):
-        super().__init__(name, id, 0, price)
+        super(StoreEvent, self).__init__(name, id, 0, price)
         self.store = store
         self.isEvent = True
-
-
-
