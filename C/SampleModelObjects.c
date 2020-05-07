@@ -23,6 +23,7 @@ struct Product* Masterclass;
 struct Product* Makeover;
 
 struct Order* RecentOrder;
+struct Order* OldOrder;
 
 void make_sample_model_objects(void)
 {
@@ -53,6 +54,12 @@ void make_sample_model_objects(void)
     struct LinkedList* order_products = make_linked_list();
     linked_list_append(&order_products, Makeover);
     RecentOrder = make_order("1234", from_iso_date("2018-09-01T00:00Z"),
+                             FlagshipStore, order_products);
+    destroy_linked_list(order_products);
+
+    order_products = make_linked_list();
+    linked_list_append(&order_products, CherryBloom);
+    OldOrder = make_order("1235", from_iso_date("2017-09-01T00:00Z"),
                              FlagshipStore, order_products);
     destroy_linked_list(order_products);
 }
