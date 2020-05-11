@@ -13,6 +13,7 @@ namespace ProductExport
                     tax += 10;
                 else
                     tax += 20;
+
                 foreach (var product in order.Products)
                     if (product.IsEvent())
                         tax += product.Price.GetAmountInCurrency("USD") * 0.25;

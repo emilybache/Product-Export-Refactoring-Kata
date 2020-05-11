@@ -1,7 +1,7 @@
 import re
 
-from sample_model_objects import RecentOrder, OldOrder, FlagshipStore
-from xml_exporter import *
+from .sample_model_objects import RecentOrder, OldOrder, FlagshipStore
+from ..xml_exporter import *
 from approvaltests import verify
 
 

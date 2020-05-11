@@ -1,7 +1,7 @@
 import dateutil
 
 
-def calculateAddedTax(orders):
+def calculate_added_tax(orders):
         tax = 0
         for order in orders:
             if order.date < dateutil.parser.parse("2018-01-01T00:00Z"):
@@ -11,8 +11,8 @@ def calculateAddedTax(orders):
 
             for product in order.products:
                 if product.isEvent:
-                    tax += product.price.get_amount_in_currency("USD") * 0.25;
+                    tax += product.price.get_amount_in_currency("USD") * 0.25
                 else:
-                    tax += product.price.get_amount_in_currency("USD") * 0.175;
+                    tax += product.price.get_amount_in_currency("USD") * 0.175
 
         return tax

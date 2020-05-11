@@ -4,7 +4,6 @@ using ApprovalTests;
 using ApprovalTests.Reporters;
 using Xunit;
 
-
 namespace ProductExport
 {
     [UseReporter(typeof(DiffReporter))]

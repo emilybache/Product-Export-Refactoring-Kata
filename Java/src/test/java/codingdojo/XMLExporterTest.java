@@ -41,5 +41,4 @@ public class XMLExporterTest {
         xml = xml.replaceFirst(regex, "createdAt='2018-09-20T00:00Z'");
         Approvals.verifyXml(xml);
     }
-
 }

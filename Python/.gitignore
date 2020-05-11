@@ -1,0 +1,12 @@
+*.pyc
+.cache
+__pycache__
+
+# IDEA
+.idea
+*.iml
+
+# Eclipse
+.project
+.pydevproject
+.settings
