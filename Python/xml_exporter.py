@@ -2,7 +2,7 @@ import datetime
 
 from dateutil.parser import parse
 
-from tax_calculator import calculateAddedTax
+from .tax_calculator import calculate_added_tax
 
 
 def export_full(orders):
@@ -74,14 +74,12 @@ def export_tax_details(orders):
             tax += 10
         else:
             tax += 20
-
         xml += "{:.2f}".format(tax)
         xml += "</orderTax>"
         xml += "</order>"
 
-    total_tax = calculateAddedTax(orders)
+    total_tax = calculate_added_tax(orders)
     xml += "{:.2f}".format(total_tax)
-    xml += '\n'
     xml += "</orderTax>"
     return xml
 
@@ -96,7 +94,6 @@ def export_store(store):
     xml += "'"
     xml += ">"
     for product in store.stock:
-
         xml += "<product"
         xml += " id='"
         xml += product.id
@@ -121,6 +118,7 @@ def export_store(store):
         xml += "</product>"
 
     xml += "</store>"
+    
     return xml
 
 
@@ -158,5 +156,3 @@ def export_history(orders):
 
 def stylist_for(product):
     return "Celeste Pulchritudo"  # in future we will look up the name of the stylist from the database
-    
-
