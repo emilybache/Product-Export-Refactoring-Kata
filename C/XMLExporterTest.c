@@ -5,13 +5,14 @@
 #include "LinkedList.h"
 #include "SampleModelObjects.h"
 #include "XMLExporter.h"
-#include "mu_approvals\Approvals.h"
-#include <cmocka.h>
+#include <approvals_cmocka.h> /* see https://github.com/codecop/ApprovalTests.c */
+#include <cmocka.h>           /* see https://cmocka.org/ */
+#include <stdlib.h>           /* used by approvals */
 #include <string.h>
 
-struct LinkedList* orders;
+struct LinkedList *orders;
 
-static int setup_sample_model_objects(void** state)
+static int setup_sample_model_objects(void **state)
 {
     (void)state; /* unused */
     make_sample_model_objects();
@@ -21,54 +22,54 @@ static int setup_sample_model_objects(void** state)
     return 0;
 }
 
-static void test_export_full(void** state)
+static void exportFull(void **state)
 {
     (void)state; /* unused */
 
-    const char* xml = xml_export_full(orders);
+    const char *xml = xml_export_full(orders);
 
-    verify_xml(xml, "exportFull");
+    verify_xml(xml);
 }
 
-static void test_export_tax_details(void** state)
+static void exportTaxDetails(void **state)
 {
     (void)state; /* unused */
 
-    const char* xml = xml_export_tax_details(orders);
+    const char *xml = xml_export_tax_details(orders);
 
-    verify_xml(xml, "exportTaxDetails");
+    verify_xml(xml);
 }
 
-static void test_export_store(void** state)
+static void exportStore(void **state)
 {
     (void)state; /* unused */
-    struct Store* store = FlagshipStore;
+    struct Store *store = FlagshipStore;
 
-    const char* xml = xml_export_store(store);
+    const char *xml = xml_export_store(store);
 
-    verify_xml(xml, "exportStore");
+    verify_xml(xml);
 }
 
-static void test_export_history(void** state)
+static void exportHistory(void **state)
 {
     (void)state; /* unused */
 
-    const char* xml = xml_export_history(orders);
+    const char *xml = xml_export_history(orders);
 
-    char* first_created = strstr(xml, "createdAt");
+    char *first_created = strstr(xml, "createdAt");
     first_created += 9 + 1 /* = */ + 1 /* " */;
     memcpy(first_created, "2018-09-20T00:00Z", 17);
 
-    verify_xml(xml, "exportHistory");
+    verify_xml(xml);
 }
 
 int main(void)
 {
     const struct CMUnitTest test_suite[] = {
-        cmocka_unit_test(test_export_full),        /* */
-        cmocka_unit_test(test_export_tax_details), /* */
-        cmocka_unit_test(test_export_store),       /* */
-        cmocka_unit_test(test_export_history),     /* */
+        cmocka_unit_test(exportFull),       /* */
+        cmocka_unit_test(exportTaxDetails), /* */
+        cmocka_unit_test(exportStore),      /* */
+        cmocka_unit_test(exportHistory),    /* */
     };
 
     return cmocka_run_group_tests(test_suite, setup_sample_model_objects, NULL);
