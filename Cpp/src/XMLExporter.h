@@ -2,6 +2,7 @@
 #include <string>
 #include <vector>
 #include "Store.h"
+#include "Order.h"
 
 class XMLExporter {
 public:
