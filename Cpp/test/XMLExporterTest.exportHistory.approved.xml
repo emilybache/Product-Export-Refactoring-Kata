@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<orderHistory createdAt='2018-09-20T00:00Z'>
+  <order date='2018-09-01T00:00Z' totalDollars='149.99'>
+    <product id='EVENT02'>
+      Makeover
+    </product>
+  </order>
+  <order date='2017-09-01T00:00Z' totalDollars='14.99'>
+    <product id='LIPSTICK01'>
+      Cherry Bloom
+    </product>
+  </order>
+</orderHistory>
