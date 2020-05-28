@@ -19,7 +19,6 @@ class Product
     int get_product_weight();
     Price* get_product_price();
     virtual bool is_product_event();
-    virtual void product_set_location(Store* location);
 private:
     std::string _name;
     std::string _id;

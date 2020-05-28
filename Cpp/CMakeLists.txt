@@ -4,7 +4,6 @@ project(product_export_refactoring_kata)
 set(CMAKE_CXX_STANDARD 11)
 
 # uncomment these lines to enable coverage measurements using gcov
-#set(CMAKE_C_FLAGS "--coverage")
 #set(CMAKE_CXX_FLAGS "--coverage")
 
 enable_testing()

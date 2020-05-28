@@ -31,7 +31,3 @@ bool Product::is_product_event() {
     return false;
 }
 
-void Product::product_set_location(Store *location) {
-    _location = location;
-}
-
