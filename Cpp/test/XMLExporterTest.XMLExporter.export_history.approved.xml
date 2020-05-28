@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <orderHistory createdAt='date_1'>
-<order date='2018-09-01 01:00:00' totalDollars='149.99'>
+<order date='2018-09-01 01:00:00' totalDollars='169.98'>
 <product id='EVENT02'>
 Makeover</product>
+<product id='TOOL01'>
+Eyelash curler</product>
 </order>
 <order date='2017-09-01 01:00:00' totalDollars='0.00'>
 </order>

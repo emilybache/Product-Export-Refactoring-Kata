@@ -3,12 +3,14 @@
 <order date='2018-09-01 01:00:00'>
 <product id='EVENT02'>
 Makeover</product>
+<product id='TOOL01'>
+Eyelash curler</product>
 <orderTax currency='USD'>
-57.50</orderTax>
+61.00</orderTax>
 </order>
 <order date='2017-09-01 01:00:00'>
 <orderTax currency='USD'>
 10.00</orderTax>
 </order>
-67.50</orderTax>
+71.00</orderTax>
 

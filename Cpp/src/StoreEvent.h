@@ -11,10 +11,11 @@
 class StoreEvent : public Product {
 public:
     StoreEvent(std::string name, std::string id,
-               Store *location, Price *price) : Product(std::move(name), std::move(id), 0, price), _location(location) {
+               Store *location, Price *price) : Product(std::move(name), std::move(id), 0, price) {
+        product_set_location(location);
     }
     bool is_product_event() override;
-    void product_set_location(Store* location) override;
+    void product_set_location(Store* location);
 private:
     Store *_location;
 };

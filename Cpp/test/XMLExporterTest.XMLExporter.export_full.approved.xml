@@ -5,6 +5,10 @@
 <price currency='USD'>
 149.99</price>
 Makeover</product>
+<product id='TOOL01' weight='100'>
+<price currency='USD'>
+19.99</price>
+Eyelash curler</product>
 </order>
 <order id='1235'>
 </order>
