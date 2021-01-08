@@ -1,6 +1,8 @@
 package codingdojo;
 
 import org.approvaltests.Approvals;
+import org.approvaltests.core.Options;
+import org.approvaltests.scrubbers.RegExScrubber;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -40,5 +42,7 @@ public class XMLExporterTest {
         String regex = "createdAt='[^']+'";
         xml = xml.replaceFirst(regex, "createdAt='2018-09-20T00:00Z'");
         Approvals.verifyXml(xml);
+        // Unfortunately due to a bug in Approvals this line doesn't work
+        //Approvals.verifyXml(xml, new Options(new RegExScrubber("createdAt='[^']+'", "createdAt='2018-09-20T00:00Z'")));
     }
 }
