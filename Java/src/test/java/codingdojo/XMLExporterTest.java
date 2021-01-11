@@ -40,9 +40,8 @@ public class XMLExporterTest {
         Collection<Order> orders = Arrays.asList(RecentOrder, OldOrder);
         String xml = XMLExporter.exportHistory(orders);
         String regex = "createdAt='[^']+'";
-        xml = xml.replaceFirst(regex, "createdAt='2018-09-20T00:00Z'");
-        Approvals.verifyXml(xml);
-        // Unfortunately due to a bug in Approvals this line doesn't work
-        //Approvals.verifyXml(xml, new Options(new RegExScrubber("createdAt='[^']+'", "createdAt='2018-09-20T00:00Z'")));
+        Approvals.verifyXml(xml, new Options(new RegExScrubber(
+                "createdAt=\"[^\"]+\"",
+                "createdAt=\"2018-09-20T00:00Z\"")));
     }
 }
