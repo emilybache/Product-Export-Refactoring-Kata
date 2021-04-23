@@ -1,0 +1,5 @@
+set(SRC_LIB_NAME src)
+set(SOURCES LinkedList.c LinkedMap.c Order.c Price.c Product.c Store.c StoreEvent.c StringBuilder.c TaxCalculator.c Util.c XMLExporter.c)
+add_library(${SRC_LIB_NAME} ${SOURCES})
+target_sources(${SRC_LIB_NAME} PRIVATE ${SOURCES})
+target_include_directories(${SRC_LIB_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
