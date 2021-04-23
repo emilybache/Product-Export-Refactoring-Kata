@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<orderTax>
+<order date='2018-09-01T00:00Z'>
+<product id='EVENT02'>
+Makeover</product>
+<orderTax currency='USD'>
+57.50</orderTax>
+</order>
+<order date='2016-09-01T00:00Z'>
+<product id='PURFUME01'>
+Wild Rose</product>
+<orderTax currency='USD'>
+16.12</orderTax>
+</order>
+73.62</orderTax>
+
