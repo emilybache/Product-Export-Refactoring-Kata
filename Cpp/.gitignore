@@ -1,4 +1,4 @@
-.idea
-.vs
-cmake-build-debug
-build
+/build_meson/
+/subprojects/Catch2-*/
+/subprojects/packagecache/
+/cmake-build-*/

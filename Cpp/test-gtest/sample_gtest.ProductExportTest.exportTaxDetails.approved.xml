@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<orderTax>
+<order date='2018-09-01 01:00:00'>
+<product id='EVENT02'>
+Makeover</product>
+<product id='TOOL01'>
+Eyelash curler</product>
+<orderTax currency='USD'>
+61.00</orderTax>
+</order>
+<order date='2017-09-01 01:00:00'>
+<product id='LIPSTICK01'>
+Cherry Bloom</product>
+<product id='EVENT01'>
+Eyeshadow Masterclass</product>
+<orderTax currency='USD'>
+42.62</orderTax>
+</order>
+103.62</orderTax>
+

@@ -11,6 +11,14 @@ Makeover</product>
 Eyelash curler</product>
 </order>
 <order id='1235'>
+<product id='LIPSTICK01' weight='30'>
+<price currency='USD'>
+14.99</price>
+Cherry Bloom</product>
+<product id='EVENT01' stylist='Celeste Pulchritudo'>
+<price currency='USD'>
+119.99</price>
+Eyeshadow Masterclass</product>
 </order>
 </orders>
 

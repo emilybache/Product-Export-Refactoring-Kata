@@ -1,26 +1,10 @@
 #include "ApprovalTests.hpp"
-#include "catch2/catch.hpp"
+#include "doctest/doctest.h"
 
 #include "XMLExporter.h"
+#include "StoreEvent.h"
+#include "Util.h"
 
-#include <vector>
-#include <Util.h>
-#include <StoreEvent.h>
-
-std::string scrubDate(const std::string &input) {
-    static const std::regex regex("createdAt='[^']+'");
-
-    int matchNumber = 1;
-    auto result = input;
-    std::smatch m;
-    if (std::regex_search(result, m, regex)) {
-        auto guid_match = m.str();
-        auto replacement = "createdAt='date_" + std::to_string(matchNumber) + "'";
-        result = ApprovalTests::StringUtils::replaceAll(result, guid_match, replacement);
-        matchNumber += 1;
-    }
-    return result;
-}
 
 void verifyXml(std::string xml, ApprovalTests::Options options = ApprovalTests::Options()) {
     xml = ApprovalTests::StringUtils::replaceAll(xml, ">", ">\n");
@@ -46,11 +30,11 @@ TEST_CASE("XMLExporter") {
     Store* FlagshipStore = new Store("Nordstan", "4189", storeProducts);
     /* Store events add themselves to the stocked items at their store */
     Product* Masterclass = new StoreEvent("Eyeshadow Masterclass", "EVENT01",
-                                 FlagshipStore, new Price(119.99, "USD"));
+                                          FlagshipStore, new Price(119.99, "USD"));
     Product* Makeover = new StoreEvent("Makeover", "EVENT02",
-                              FlagshipStore, new Price(149.99, "USD"));
+                                       FlagshipStore, new Price(149.99, "USD"));
 
-    SECTION("export store") {
+    SUBCASE("export store") {
         auto xml = XMLExporter().export_store(FlagshipStore);
         verifyXml(xml);
     }
@@ -59,32 +43,33 @@ TEST_CASE("XMLExporter") {
     orderProducts.push_back(Makeover);
     orderProducts.push_back(EyelashCurler);
     Order* RecentOrder = new Order("1234", from_iso_date("2018-09-01T00:00Z"),
-                            FlagshipStore, orderProducts);
+                                   FlagshipStore, orderProducts);
 
     std::vector<Product *> oldOrderProducts;
-    orderProducts.push_back(CherryBloom);
-    orderProducts.push_back(Masterclass);
+    oldOrderProducts.push_back(CherryBloom);
+    oldOrderProducts.push_back(Masterclass);
     Order* OldOrder = new Order("1235", from_iso_date("2017-09-01T00:00Z"),
-                         FlagshipStore, oldOrderProducts);
+                                FlagshipStore, oldOrderProducts);
 
     auto orders = std::vector<Order *>();
     orders.push_back(RecentOrder);
     orders.push_back(OldOrder);
 
-    SECTION("export full") {
+    SUBCASE("export full") {
         auto xml = XMLExporter().export_full(orders);
         verifyXml(xml);
     }
-    SECTION("export tax details") {
+    SUBCASE("export tax details") {
         auto xml = XMLExporter().export_tax_details(orders);
         verifyXml(xml);
     }
-    SECTION("export history") {
+    SUBCASE("export history") {
         auto xml = XMLExporter().export_history(orders);
-        auto options = ApprovalTests::Options().withScrubber(scrubDate);
+        auto options = ApprovalTests::Options().withScrubber(
+                ApprovalTests::Scrubbers::createRegexScrubber("createdAt='[^']+'", "createdAt='date'")
+        );
         verifyXml(xml, options);
     }
 }
-
 
 

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<store name='Nordstan'>
+<product id='TOOL01' weight='50'>
+<price currency='USD'>
+24.99</price>
+Blusher Brush</product>
+<product id='LIPSTICK01' weight='30'>
+<price currency='USD'>
+14.99</price>
+Cherry Bloom</product>
+<product id='SKIN_CREAM01' weight='250'>
+<price currency='USD'>
+10.99</price>
+Cocoa Butter</product>
+<product id='TOOL01' weight='100'>
+<price currency='USD'>
+19.99</price>
+Eyelash curler</product>
+<product id='EVENT01' location='Nordstan'>
+<price currency='USD'>
+119.99</price>
+Eyeshadow Masterclass</product>
+<product id='EVENT02' location='Nordstan'>
+<price currency='USD'>
+149.99</price>
+Makeover</product>
+<product id='LIPSTICK02' weight='30'>
+<price currency='USD'>
+14.99</price>
+Rose Petal</product>
+<product id='PURFUME01' weight='200'>
+<price currency='USD'>
+34.99</price>
+Wild Rose</product>
+</store>
+

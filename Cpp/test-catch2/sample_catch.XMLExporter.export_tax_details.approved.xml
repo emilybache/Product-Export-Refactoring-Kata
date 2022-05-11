@@ -9,8 +9,12 @@ Eyelash curler</product>
 61.00</orderTax>
 </order>
 <order date='2017-09-01 01:00:00'>
+<product id='LIPSTICK01'>
+Cherry Bloom</product>
+<product id='EVENT01'>
+Eyeshadow Masterclass</product>
 <orderTax currency='USD'>
-10.00</orderTax>
+42.62</orderTax>
 </order>
-71.00</orderTax>
+103.62</orderTax>
 
