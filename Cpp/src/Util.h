@@ -10,7 +10,9 @@ static time_t from_iso_date(std::string datetime) {
     std::stringstream ss(datetime);
     ss >> std::get_time(&tm, "%Y-%m-%d %H:%M:%S");
     std::time_t time = mktime(&tm);
+
     return time;
+
 };
 static std::string make_iso_date_str(time_t date) {
     std::tm * ptm = std::localtime(&date);
