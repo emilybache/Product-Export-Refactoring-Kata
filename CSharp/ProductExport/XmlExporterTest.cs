@@ -1,19 +1,19 @@
 using System.Collections.Generic;
-using ApprovalTests;
-using ApprovalTests.Reporters;
+using System.Threading.Tasks;
+using VerifyXunit;
 using Xunit;
 
 namespace ProductExport
 {
+    [UsesVerify]
     public class XmlExporterTest
     {
-
         [Fact]
-        public void TestSomething()
+        public Task Something()
         {
             // TODO: finish writing this test
+            var something = "";
+            return Verifier.Verify(something);
         }
-
     }
-
 }
