@@ -1,46 +1,87 @@
+using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Text;
 using System.Text.RegularExpressions;
-using ApprovalTests;
-using ApprovalTests.Reporters;
+using System.Threading.Tasks;
+using System.Xml;
+using VerifyTests;
+using VerifyXunit;
 using Xunit;
 
 namespace ProductExport
 {
-    [UseReporter(typeof(DiffReporter))]
+    [UsesVerify]
     public class XmlExporterTest
     {
         [Fact]
-        public void ExportFull()
+        public Task ExportFull()
         {
             var orders = new List<Order>() {SampleModelObjects.RecentOrder, SampleModelObjects.OldOrder};
             var xml = XmlExporter.ExportFull(orders);
-            Approvals.VerifyXml(xml);
+            return VerifyXml(xml);
+        }
+
+        private Task VerifyXml(string xml)
+        {
+            var settings = new VerifySettings();
+            return VerifyXml(xml, settings);
+        }
+
+        private static Task VerifyXml(string xml, VerifySettings settings)
+        {
+            try
+            {
+                settings.UseExtension("xml");
+                var xmlDoc = new XmlDocument();
+                xmlDoc.LoadXml(xml);
+                return Verifier.Verify(ToIndentedString(xmlDoc), settings);
+            }
+            catch (Exception e)
+            {
+                return Verifier.Verify(xml);
+            }
+        }
+
+        static string ToIndentedString( XmlDocument doc )
+        {
+            var stringWriter = new StringWriter(new StringBuilder());
+            var xmlTextWriter = new XmlTextWriter(stringWriter) {Formatting = Formatting.Indented};
+            doc.Save( xmlTextWriter );
+            return stringWriter.ToString();
         }
 
         [Fact]
-        public void ExportTaxDetails()
+        public Task ExportTaxDetails()
         {
             var orders = new List<Order>() {SampleModelObjects.RecentOrder, SampleModelObjects.OldOrder};
             var xml = XmlExporter.ExportTaxDetails(orders);
-            Approvals.VerifyXml(xml);
+            return VerifyXml(xml);
         }
 
         [Fact]
-        public void ExportStore()
+        public Task ExportStore()
         {
             var store = SampleModelObjects.FlagshipStore;
             var xml = XmlExporter.ExportStore(store);
-            Approvals.VerifyXml(xml);
+            return VerifyXml(xml);
         }
 
         [Fact]
-        public void ExportHistory()
+        public Task ExportHistory()
         {
             var orders = new List<Order>() {SampleModelObjects.RecentOrder, SampleModelObjects.OldOrder};
             var xml = XmlExporter.ExportHistory(orders);
-            var regex = "createdAt=\"[^\"]+\"";
-            var report = Regex.Replace(xml, regex, "createdAt=\"2018-09-20T00:00Z\"");
-            Approvals.VerifyXml(report);
+            var settings = new VerifySettings();
+            settings.AddScrubber(
+                input =>
+                {
+                    var regex = "createdAt=\"[^\"]+\"";
+                    var replacement = "createdAt=\"2018-09-20T00:00Z\"";
+                    var scrubbed = Regex.Replace(input.ToString(), regex, replacement);
+                    input.Clear().Append(scrubbed);
+                });
+            return VerifyXml(xml, settings);
         }
     }
 }
