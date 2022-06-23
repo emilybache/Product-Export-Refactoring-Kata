@@ -2,6 +2,7 @@ package codingdojo;
 
 import org.approvaltests.Approvals;
 import org.approvaltests.core.Options;
+import org.approvaltests.scrubbers.DateScrubber;
 import org.approvaltests.scrubbers.RegExScrubber;
 import org.junit.Test;
 
@@ -40,8 +41,8 @@ public class XMLExporterTest {
         Collection<Order> orders = Arrays.asList(RecentOrder, OldOrder);
         String xml = XMLExporter.exportHistory(orders);
         String regex = "createdAt='[^']+'";
-        Approvals.verifyXml(xml, new Options(new RegExScrubber(
-                "createdAt=\"[^\"]+\"",
-                "createdAt=\"2018-09-20T00:00Z\"")));
+        Approvals.verifyXml(xml, new Options().withScrubber(
+                DateScrubber.getScrubberFor("2022-06-21T11:29Z")
+        ));
     }
 }
