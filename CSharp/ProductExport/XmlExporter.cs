@@ -7,56 +7,47 @@ namespace ProductExport
 {
     public class XmlExporter
     {
-        public static string ExportFull(List<Order> orders)
+        public static XDocument ExportFull(List<Order> orders)
         {
             var root = new XElement("orders");
-            var xml = new StringBuilder();
-            xml.Append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
-            xml.Append("<orders>");
             foreach (var order in orders)
             {
-                var orderElement = new XElement("order",new XAttribute("id",order.Id));
+                var orderElement = new XElement(
+                    "order",
+                    new XAttribute("id", order.Id));
                 root.Add(orderElement);
-                xml.Append("<order");
-                xml.Append(" id='");
-                xml.Append(order.Id);
-                xml.Append("'>");
                 foreach (var product in order.Products)
                 {
-                    var productElement = new XElement("product",new XAttribute("id",product.Id));
-                    xml.Append("<product");
-                    xml.Append(" id='");
-                    xml.Append(product.Id);
-                    xml.Append("'");
+                    var productElement = new XElement(
+                        "product",
+                        new XAttribute("id", product.Id)
+                        );
                     if (product.IsEvent())
                     {
-                        productElement.Add(new XAttribute("stylist", StylistFor(product)));
-                        xml.Append(" stylist='");
-                        xml.Append(StylistFor(product));
-                        xml.Append("'");
+                        productElement.Add(
+                            new XAttribute("stylist", StylistFor(product)));
                     }
 
                     if (product.Weight > 0)
                     {
-                        productElement.Add(new XAttribute("weight", product.Weight));
+                        productElement.Add(
+                            new XAttribute("weight", product.Weight));
                     }
 
-                    xml.Append("<price");
-                    xml.Append(" currency='");
-                    xml.Append(product.Price.CurrencyCode);
-                    xml.Append("'>");
-                    xml.Append(product.Price.Amount);
-                    xml.Append("</price>");
-                    xml.Append(product.Name);
-                    xml.Append("</product>");
-                }
+                    var price = product.Price;
+                    productElement.Add(
+                        new XElement(
+                            "price",
+                            new XAttribute("currency", price.CurrencyCode),
+                            price.Amount));
 
-                xml.Append("</order>");
+                    productElement.Add(product.Name);
+
+                    orderElement.Add(productElement);
+                }
             }
 
-            xml.Append("</orders>");
-            var document = new XDocument(root);
-            return XmlFormatter.PrettyPrint(xml.ToString());
+            return new XDocument(root);
         }
 
         public static string ExportTaxDetails(List<Order> orders)

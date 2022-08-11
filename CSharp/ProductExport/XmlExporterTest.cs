@@ -17,9 +17,13 @@ namespace ProductExport
         [Fact]
         public Task ExportFull()
         {
-            var orders = new List<Order>() {SampleModelObjects.RecentOrder, SampleModelObjects.OldOrder};
+            var orders = new List<Order>
+            {
+                SampleModelObjects.RecentOrder,
+                SampleModelObjects.OldOrder
+            };
             var xml = XmlExporter.ExportFull(orders);
-            return VerifyXml(xml);
+            return Verifier.Verify(xml);
         }
 
         private Task VerifyXml(string xml)
