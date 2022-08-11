@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Xml.Linq;
 
 namespace ProductExport
 {
@@ -8,23 +9,28 @@ namespace ProductExport
     {
         public static string ExportFull(List<Order> orders)
         {
+            var root = new XElement("orders");
             var xml = new StringBuilder();
             xml.Append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
             xml.Append("<orders>");
             foreach (var order in orders)
             {
+                var orderElement = new XElement("order",new XAttribute("id",order.Id));
+                root.Add(orderElement);
                 xml.Append("<order");
                 xml.Append(" id='");
                 xml.Append(order.Id);
                 xml.Append("'>");
                 foreach (var product in order.Products)
                 {
+                    var productElement = new XElement("product",new XAttribute("id",product.Id));
                     xml.Append("<product");
                     xml.Append(" id='");
                     xml.Append(product.Id);
                     xml.Append("'");
                     if (product.IsEvent())
                     {
+                        productElement.Add(new XAttribute("stylist", StylistFor(product)));
                         xml.Append(" stylist='");
                         xml.Append(StylistFor(product));
                         xml.Append("'");
@@ -32,12 +38,9 @@ namespace ProductExport
 
                     if (product.Weight > 0)
                     {
-                        xml.Append(" weight='");
-                        xml.Append(product.Weight);
-                        xml.Append("'");
+                        productElement.Add(new XAttribute("weight", product.Weight));
                     }
 
-                    xml.Append(">");
                     xml.Append("<price");
                     xml.Append(" currency='");
                     xml.Append(product.Price.CurrencyCode);
@@ -52,6 +55,7 @@ namespace ProductExport
             }
 
             xml.Append("</orders>");
+            var document = new XDocument(root);
             return XmlFormatter.PrettyPrint(xml.ToString());
         }
 
