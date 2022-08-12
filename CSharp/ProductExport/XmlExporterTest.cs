@@ -1,10 +1,8 @@
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using System.Xml;
+using System.Xml.Linq;
 using VerifyTests;
 using VerifyXunit;
 using Xunit;
@@ -32,25 +30,15 @@ namespace ProductExport
         {
             try
             {
-                settings.UseExtension("xml");
-                var xmlDoc = new XmlDocument();
-                xmlDoc.LoadXml(xml);
-                return Verifier.Verify(ToIndentedString(xmlDoc), settings);
+                var xDoc = XDocument.Parse(xml);
+                return Verifier.Verify(xDoc, settings);
             }
             catch (Exception e)
             {
-                return Verifier.Verify(xml);
+                return Verifier.Verify(xml, settings);
             }
         }
-
-        static string ToIndentedString( XmlDocument doc )
-        {
-            var stringWriter = new StringWriter(new StringBuilder());
-            var xmlTextWriter = new XmlTextWriter(stringWriter) {Formatting = Formatting.Indented};
-            doc.Save( xmlTextWriter );
-            return stringWriter.ToString();
-        }
-
+        
         [Fact]
         public Task ExportTaxDetails()
         {
