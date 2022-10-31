@@ -18,28 +18,8 @@ namespace ProductExport
         {
             // TODO: finish writing this test
             var xml = "";
-            return VerifyXml(xml);
+            return Verifier.VerifyXml(xml);
         }
-        
-        private Task VerifyXml(string xml)
-        {
-            var settings = new VerifySettings();
-            return VerifyXml(xml, settings);
-        }
-
-        private static Task VerifyXml(string xml, VerifySettings settings)
-        {
-            try
-            {
-                var xDoc = XDocument.Parse(xml);
-                return Verifier.Verify(xDoc, settings);
-            }
-            catch (Exception e)
-            {
-                return Verifier.Verify(xml, settings);
-            }
-        }
-        
 
     }
 }
