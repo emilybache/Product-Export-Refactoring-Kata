@@ -4,7 +4,6 @@ import org.approvaltests.Approvals;
 import org.approvaltests.core.Options;
 import org.approvaltests.scrubbers.DateScrubber;
 import org.approvaltests.scrubbers.RegExScrubber;
-import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -12,6 +11,8 @@ import java.util.Collection;
 import static codingdojo.SampleModelObjects.FlagshipStore;
 import static codingdojo.SampleModelObjects.OldOrder;
 import static codingdojo.SampleModelObjects.RecentOrder;
+
+import org.junit.jupiter.api.Test;
 
 public class XMLExporterTest {
 
