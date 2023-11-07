@@ -1,21 +1,16 @@
-import { format, parseISO } from 'date-fns-tz';
+import { parse } from 'date-fns';
+import { format, utcToZonedTime, zonedTimeToUtc } from 'date-fns-tz';
 
 export class Util {
 
     static fromIsoDate(dateTime: string): Date {
-        // TimeZone tz = TimeZone.getTimeZone("UTC");
-        // DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm'Z'");
-        // df.setTimeZone(tz);
-        // return df.parse(datetime);
-        return parseISO(dateTime);
+        const localDate = parse(dateTime, "yyyy-MM-dd'T'HH:mm'Z", new Date());
+        return zonedTimeToUtc(localDate, 'UTC');
     }
 
     static toIsoDate(date: Date): string {
-        // TimeZone tz = TimeZone.getTimeZone("UTC");
-        // DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm'Z'");
-        // df.setTimeZone(tz);
-        // return df.format(date);
-        return format(date, "yyyy-MM-dd'T'HH:mm'Z'", { timeZone: 'UTC' });
+        const utcDate = utcToZonedTime(date, 'UTC');
+        return format(utcDate, "yyyy-MM-dd'T'HH:mm'Z'", { timeZone: 'UTC' });
     }
 
 }

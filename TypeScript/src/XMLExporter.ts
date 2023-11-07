@@ -61,13 +61,12 @@ export class XMLExporter {
                 }
             }
 
-            // xml.append("<orderTax currency='USD'>");
-            // if (order.getDate().before(Util.fromIsoDate("2018-01-01T00:00Z")))
-            //     tax += 10;
-            // else
-            //     tax += 20;
-            // xml.append(formatter.format(tax));
-            // xml.append("</orderTax>");
+            if (order.getDate() < Util.fromIsoDate("2018-01-01T00:00Z")) {
+                tax += 10;
+            } else {
+                tax += 20;
+            }
+
             xml.push(`<orderTax currency='USD'>${formatNumber(tax)}</orderTax>`);
             xml.push("</order>");
         }
