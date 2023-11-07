@@ -17,3 +17,4 @@ Masterclass = StoreEvent("Eyeshadow Masterclass", "EVENT01", FlagshipStore, Pric
 Makeover = StoreEvent("Makeover", FlagshipStore, "EVENT02", Price(149.99, "USD"))
 
 RecentOrder = Order("1234", parse("2018-09-01T00:00Z"), FlagshipStore, [Makeover])
+OldOrder = Order("1235", parse("2017-09-01T00:00Z"), FlagshipStore, [CherryBloom])

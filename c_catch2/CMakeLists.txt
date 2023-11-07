@@ -6,7 +6,8 @@ project(ProductExportRefactoringKata VERSION 1.0
 set(CMAKE_C_STANDARD 99)
 
 # uncomment these lines to enable coverage measurements using gcov
-#set(CMAKE_CXX_FLAGS "--coverage")
+set(CMAKE_C_FLAGS "--coverage")
+set(CMAKE_CXX_FLAGS "--coverage")
 
 enable_testing()
 add_subdirectory(src)

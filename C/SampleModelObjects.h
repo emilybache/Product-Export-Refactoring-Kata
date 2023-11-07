@@ -19,5 +19,6 @@ extern struct Product* Masterclass;
 extern struct Product* Makeover;
 
 extern struct Order* RecentOrder;
+extern struct Order* OldOrder;
 
 extern void make_sample_model_objects(void);
