@@ -23,7 +23,7 @@ export class StoreEvent extends Product {
     }
 
     toString(): string {
-        return "StoreEvent{" + this.name + '}';
+        return "StoreEvent{" + this.name + "}";
     }
 
     isEvent(): boolean {

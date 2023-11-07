@@ -41,7 +41,7 @@ export class Store {
     }
 
     toString(): string {
-        return "Store{" + this.name + '}';
+        return "Store{" + this.name + "}";
     }
 
     saveToDatabase(): void {

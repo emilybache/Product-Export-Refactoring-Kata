@@ -27,7 +27,7 @@ export class Product {
     }
 
     toString(): string {
-        return "Product{" + this.name + '}';
+        return "Product{" + this.name + "}";
     }
 
     getWeight(): number {

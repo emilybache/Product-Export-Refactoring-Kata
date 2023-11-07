@@ -21,7 +21,7 @@ export class Order {
     }
 
     toString(): string {
-        return "Order{" + this.id + '}';
+        return "Order{" + this.id + "}";
     }
 
     saveToDatabase(): void {

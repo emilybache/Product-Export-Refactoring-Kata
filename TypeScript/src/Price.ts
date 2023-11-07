@@ -9,7 +9,7 @@ export class Price {
     }
 
     toString(): string {
-        return "Price{" + this.amount + '}';
+        return "Price{" + this.amount + "}";
     }
 
     getCurrency(): string {
