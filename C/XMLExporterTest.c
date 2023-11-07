@@ -5,8 +5,9 @@
 #include "LinkedList.h"
 #include "SampleModelObjects.h"
 #include "XMLExporter.h"
-#include "mu_approvals\Approvals.h"
-#include <cmocka.h>
+#include <approvals_cmocka.h> /* see https://github.com/codecop/ApprovalTests.c */
+#include <cmocka.h>           /* see https://cmocka.org/ */
+#include <stdlib.h>           /* used by approvals */
 #include <string.h>
 
 static void test_something(void** state)
