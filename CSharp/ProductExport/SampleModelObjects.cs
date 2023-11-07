@@ -27,6 +27,7 @@ namespace ProductExport
 
         public static Order RecentOrder = new Order("1234", Util.FromIsoDate("2018-09-01T00:00Z"),
             FlagshipStore, new Product[] { Makeover });
+
     }
 
 }

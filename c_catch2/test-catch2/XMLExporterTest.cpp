@@ -6,6 +6,7 @@ extern "C"
 #include "LinkedList.h"
 #include "SampleModelObjects.h"
 #include "XMLExporter.h"
+#include "Util.h"
 }
 
 void verifyXml(std::string xml, ApprovalTests::Options options = ApprovalTests::Options()) {

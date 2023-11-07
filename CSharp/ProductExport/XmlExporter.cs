@@ -1,11 +1,14 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Text;
 
 namespace ProductExport
 {
     public class XmlExporter
     {
+        private static readonly CultureInfo Culture = CultureInfo.CreateSpecificCulture("en-GB");
+
         public static string ExportFull(List<Order> orders)
         {
             var xml = new StringBuilder();
@@ -42,7 +45,7 @@ namespace ProductExport
                     xml.Append(" currency='");
                     xml.Append(product.Price.CurrencyCode);
                     xml.Append("'>");
-                    xml.Append(product.Price.Amount);
+                    xml.Append(PrintPrice(product.Price.Amount));
                     xml.Append("</price>");
                     xml.Append(product.Name);
                     xml.Append("</product>");
@@ -88,13 +91,15 @@ namespace ProductExport
                     tax += 10;
                 else
                     tax += 20;
-                xml.Append($"{tax:N2}%");
+                xml.Append(PrintPrice(tax));
+                xml.Append("%");
                 xml.Append("</orderTax>");
                 xml.Append("</order>");
             }
 
             var totalTax = TaxCalculator.CalculateAddedTax(orders);
-            xml.Append($"{totalTax:N2}%");
+            xml.Append(PrintPrice(totalTax));
+            xml.Append("%");
             xml.Append("</orderTax>");
             return XmlFormatter.PrettyPrint(xml.ToString());
         }
@@ -133,7 +138,7 @@ namespace ProductExport
                 xml.Append(" currency='");
                 xml.Append(product.Price.CurrencyCode);
                 xml.Append("'>");
-                xml.Append(product.Price.Amount);
+                xml.Append(PrintPrice(product.Price.Amount));
                 xml.Append("</price>");
                 xml.Append(product.Name);
                 xml.Append("</product>");
@@ -161,7 +166,7 @@ namespace ProductExport
                 xml.Append(Util.ToIsoDate(order.Date));
                 xml.Append("'");
                 xml.Append(" totalDollars='");
-                xml.Append(order.TotalDollars());
+                xml.Append(PrintPrice(order.TotalDollars()));
                 xml.Append("'>");
                 foreach (var product in order.Products)
                 {
@@ -184,6 +189,11 @@ namespace ProductExport
         private static string StylistFor(Product product)
         {
             return "Celeste Pulchritudo"; // in future we will look up the name of the stylist from the database
+        }
+
+        private static string PrintPrice(double price)
+        {
+            return price.ToString("N2", Culture);
         }
     }
 }

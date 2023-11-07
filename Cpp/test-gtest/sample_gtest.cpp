@@ -24,8 +24,6 @@ protected:
     std::vector<Product *> storeProducts;
     std::vector<Order *> orders;
     std::vector<Product *> orderProducts;
-    std::vector<Product *> oldOrderProducts;
-
 
     Store *FlagshipStore;
     Product *Masterclass;
@@ -61,9 +59,7 @@ protected:
         RecentOrder = new Order("1234", from_iso_date("2018-09-01T00:00Z"),
                                 FlagshipStore, orderProducts);
 
-
     }
-
 
 };
 
