@@ -4,6 +4,7 @@
 #include "XMLExporter.h"
 #include "StoreEvent.h"
 #include "Util.h"
+#include "Order.h"
 
 void verifyXml(std::string xml, ApprovalTests::Options options = ApprovalTests::Options()) {
     xml = ApprovalTests::StringUtils::replaceAll(xml, ">", ">\n");
