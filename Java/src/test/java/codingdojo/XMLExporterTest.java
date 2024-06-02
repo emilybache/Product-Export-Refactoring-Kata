@@ -3,10 +3,10 @@ package codingdojo;
 import org.approvaltests.Approvals;
 import org.junit.jupiter.api.Test;
 
-public class XMLExporterTest {
+class XMLExporterTest {
 
     @Test
-    public void testSomething() {
+    void testSomething() {
 
         // TODO: implement this test
 
